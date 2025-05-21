@@ -1,0 +1,64 @@
+.about-section {
+    background-color: #0a192f;
+    padding: 4rem;
+    color: white;
+  }
+  
+  .about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .services {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  
+  .service-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .service-icon {
+    font-size: 1.5rem;
+  }
+  
+  .about-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-text p {
+    color: #8892b0;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  
+  .stat-item {
+    text-align: center;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff6b6b;
+  }
+  
+  .plus, .percent {
+    color: #ff6b6b;
+    font-size: 1.5rem;
+  }
+  
+  .stat-label {
+    display: block;
+    color: #8892b0;
+    margin-top: 0.5rem;
+  }
