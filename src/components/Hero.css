@@ -130,14 +130,19 @@
 .greeting {
   color: var(--primary);
   font-size: 1rem;
-  margin-bottom: 1rem;
-  display: block;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  margin-left: 0;
+  letter-spacing: 0.5px;
 }
 
 .name {
-  font-size: 4.5rem;
-  font-weight: 700;
-  margin: 0.5rem 0;
+  font-size: 4rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 1.2rem;
+  color: #e6edfa;
+  line-height: 1.1;
 }
 
 .dot {
@@ -153,9 +158,9 @@
 .description {
   color: var(--text-secondary);
   font-size: 1.1rem;
-  max-width: 540px;
-  margin-bottom: 2rem;
-  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+  max-width: 600px;
 }
 
 .cta-buttons {
@@ -205,39 +210,6 @@
   display: none;
 }
 
-.tech-list {
-  display: flex;
-  gap: 2.5rem;
-  margin-top: 0; /* Remove top margin */
-  padding-bottom: 3rem;
-  position: relative;
-  z-index: 3;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
-  margin-bottom: 2rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.tech-item {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  transition: var(--transition);
-  cursor: pointer;
-  text-align: center;
-  position: relative;
-}
-
-.tech-item:hover {
-  color: var(--primary);
-  transform: translateY(-2px);
-}
-
 .nav-brand {
   display: flex;
   align-items: center;
@@ -251,6 +223,119 @@
 
 .nav-brand:hover img {
   transform: scale(1.1);
+}
+
+/* Typewriter Scan Effect */
+.typewriter-scan {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  width: max-content;
+}
+
+.typewriter-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  white-space: nowrap;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.typewriter-fill {
+  color: var(--primary);
+  font-weight: 800;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  padding-right: 0.5ch;
+  animation: scan-reveal-ref 5s linear infinite;
+  z-index: 2;
+  visibility: hidden;
+  /* Add a transition for extra smoothness if desired */
+}
+
+.typewriter-caret {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 2px;
+  background: var(--primary);
+  z-index: 3;
+  /* 5s total: 3s scan, 2s pause/blink */
+  animation: caret-move-ref 5s linear infinite, caret-blink-ref 5s steps(2, end) infinite;
+}
+
+/* Caret moves and pauses at the end */
+@keyframes caret-move-ref {
+  0%, 15% { left: 0; }
+  80%, 96% { left: 100%; }
+  100% { left: 0; }
+}
+
+/* Caret blinks only at the end pause (80%-96%) */
+@keyframes caret-blink-ref {
+  0%, 79% { opacity: 1; }
+  80%, 84% { opacity: 0; }
+  86%, 90% { opacity: 1; }
+  92%, 96% { opacity: 0; }
+  97%, 100% { opacity: 1; }
+}
+
+/* Text reveal animation with pause at 100% and smooth reset */
+@keyframes scan-reveal-ref {
+  0%, 15% {
+    width: 0;
+    visibility: hidden;
+  }
+  16% {
+    visibility: visible;
+    width: 0;
+  }
+  80%, 96% {
+    width: 100%;
+    visibility: visible;
+  }
+  100% {
+    width: 0;
+    visibility: hidden;
+  }
+}
+
+.typewriter-block {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  gap: 0.5rem;
+}
+
+.iam-label {
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.typewriter-effect {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 1.2px;
+  min-width: 220px;
+  background: none;
+  padding: 0;
+  border-radius: 0;
 }
 
 @media (max-width: 968px) {
@@ -280,13 +365,6 @@
     justify-content: center;
   }
 
-  .tech-list {
-    gap: 1.5rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
 }
 
 @media (max-width: 768px) {
@@ -365,4 +443,47 @@
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+}
+
+.hero-tech-list {
+  position: relative;
+  display: flex;
+  gap: 2.5rem;
+  padding: 2rem 0;
+  margin: 0 5rem 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-tech-list-line {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+.hero-tech-list-line.top {
+  top: 0;
+}
+
+.hero-tech-list-line.bottom {
+  bottom: 0;
+}
+
+.hero-tech-item {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: var(--transition);
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  background: none;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.hero-tech-item:hover {
+  color: var(--primary);
+  transform: translateY(-2px);
 }

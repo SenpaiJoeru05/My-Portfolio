@@ -2,6 +2,8 @@ import React from 'react';
 import './Hero.css';
 import backgroundVideo from '../assets/Test1.mp4';
 import Logo from './Logo';
+import AnimatedLine from './AnimatedLine';
+import { Typewriter } from 'react-simple-typewriter';
 
 function Hero() {
   return (
@@ -27,11 +29,22 @@ function Hero() {
         <div className="hero-text">
           <span className="greeting">Hello, my name is</span>
           <h1 className="name">Joel Rayton<span className="dot">.</span></h1>
-          <h2 className="title">AI & Full-Stack Developer</h2>
+          <div className="typewriter-block">
+            <span className="iam-label">I am </span>
+            <span className="typewriter-effect">
+              <Typewriter
+                words={['Software Engineer', 'Full-Stack Developer', 'AI Enthusiast']}
+                loop={0}
+                cursor
+                cursorStyle="|"
+                typeSpeed={80}
+                deleteSpeed={60}
+                delaySpeed={2000}
+              />
+            </span>
+          </div>
           <p className="description">
-            I'm a Computer Science graduate with a passion for building AI-powered solutions 
-            and scalable software. With a 2nd Best Thesis Award for Vision.AI (YOLOv8 Mobile App), 
-            I thrive at the intersection of AI, mobile, and full-stack development.
+            I'm a Computer Science graduate passionate about building AI-powered and scalable software solutions. I thrive at the intersection of AI, mobile, and full-stack development.
           </p>
           <div className="cta-buttons">
             <button className="btn-primary">Let's work together</button>
@@ -40,14 +53,20 @@ function Hero() {
         </div>
       </div>
 
-      <div className="tech-list">
-        <div className="tech-item">HTML5</div>
-        <div className="tech-item">CSS</div>
-        <div className="tech-item">JavaScript</div>
-        <div className="tech-item">Node.js</div>
-        <div className="tech-item">React</div>
-        <div className="tech-item">Git</div>
-        <div className="tech-item">GitHub</div>
+      <div className="hero-tech-list">
+        <div className="hero-tech-list-line top">
+          <AnimatedLine />
+        </div>
+        <div className="hero-tech-item">HTML5</div>
+        <div className="hero-tech-item">CSS</div>
+        <div className="hero-tech-item">JavaScript</div>
+        <div className="hero-tech-item">Node.js</div>
+        <div className="hero-tech-item">React</div>
+        <div className="hero-tech-item">Git</div>
+        <div className="hero-tech-item">GitHub</div>
+        <div className="hero-tech-list-line bottom">
+          <AnimatedLine />
+        </div>
       </div>
     </section>
   );

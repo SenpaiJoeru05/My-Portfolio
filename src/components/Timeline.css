@@ -1,0 +1,402 @@
+.timeline-section {
+  padding: 4rem 0;
+  background: var(--secondary);
+}
+
+/* Header Row */
+.timeline-header-row {
+  display: grid;
+  grid-template-columns: minmax(400px, 1fr) 120px minmax(400px, 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Header labels - Updated */
+.timeline-header-label {
+  position: relative;
+  padding-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align to the start of container */
+}
+
+.timeline-header-label .header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+/* Specific alignments */
+.timeline-header-label.education-label {
+  margin-left: auto; /* Push to right */
+  padding-right: 2rem;
+}
+
+.timeline-header-label.experience-label {
+  padding-left: 2rem;
+}
+
+/* Underline styling - Updated */
+.timeline-header-label::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  width: 200px;
+  background: var(--primary);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+}
+
+/* Position underlines */
+.timeline-header-label.education-label::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent, #3b82f6);
+}
+
+.timeline-header-label.experience-label::after {
+  left: 0;
+  background: linear-gradient(90deg, #22d3ee, transparent);
+}
+
+/* Header Center Lines */
+.timeline-header-center {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 2.5rem auto;
+  height: 32px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.timeline-header-horizontal {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #3b82f6 0%, #22d3ee 100%);
+  z-index: 1;
+  transform: translateY(-50%);
+  border-radius: 3px;
+  animation: growHorizontal 1s cubic-bezier(.4,2,.3,1);
+}
+@keyframes growHorizontal {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.timeline-header-vertical {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  background: linear-gradient(180deg, #3b82f6 0%, #22d3ee 100%);
+  border-radius: 5px;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: growVertical 1s 0.5s cubic-bezier(.4,2,.3,1);
+}
+@keyframes growVertical {
+  from { height: 0; }
+  to { height: 100%; }
+}
+
+/* Main timeline grid */
+.timeline-main-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* Increased gap between rows */
+  max-width: 1200px; /* Increased max-width for better spacing */
+  margin: 0 auto;
+  position: relative;
+  padding: 0 2rem; /* Added padding to prevent cards touching screen edges */
+}
+
+/* Timeline row layout */
+.timeline-row {
+  display: grid;
+  grid-template-columns: minmax(400px, 1fr) 120px minmax(400px, 1fr);
+  align-items: flex-start; /* Changed from center to flex-start */
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+/* Timeline sides positioning */
+.timeline-side {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.timeline-side.left {
+  justify-content: flex-end;
+  padding-right: 60px; /* Space for connector */
+}
+
+.timeline-side.right {
+  justify-content: flex-start;
+  padding-left: 60px; /* Space for connector */
+}
+
+/* Vertical timeline */
+.timeline-vertical-main {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, 
+    rgba(59, 130, 246, 0.3),
+    rgba(34, 211, 238, 0.3)
+  );
+  z-index: 1;
+}
+
+/* Center column with dots and connectors */
+.timeline-center {
+  position: relative;
+  width: 120px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px; /* Increased gap between dots */
+}
+
+/* Dot positioning and styling */
+.timeline-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Education dot specific styles */
+.timeline-dot.education-dot {
+  transform: translateY(-15px); /* Move education dot up */
+  background: radial-gradient(
+    circle at center,
+    #3b82f6 0%,
+    rgba(59, 130, 246, 0.8) 50%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 0 4px rgba(59, 130, 246, 0.1),
+    0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+/* Experience dot specific styles */
+.timeline-dot.experience-dot {
+  transform: translateY(15px); /* Move experience dot down */
+  background: radial-gradient(
+    circle at center,
+    #22d3ee 0%,
+    rgba(34, 211, 238, 0.8) 50%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 0 4px rgba(34, 211, 238, 0.1),
+    0 0 10px rgba(34, 211, 238, 0.3);
+}
+
+/* Horizontal connectors */
+.timeline-horizontal-connector {
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  z-index: 2;
+}
+
+.left-connector {
+  right: 50%;
+  /* Position relative to education dot */
+  transform: translateY(-50%);
+  top: calc(50% - 15px); /* Align with education dot */
+  background: linear-gradient(90deg, transparent, #3b82f6);
+}
+
+.right-connector {
+  left: calc(50% + 16px); /* Start from the edge of the dot */
+  /* Position relative to experience dot */
+  transform: translateY(-50%);
+  top: calc(50% + 15px); /* Align with experience dot */
+  background: linear-gradient(90deg, #22d3ee, transparent);
+}
+
+/* Dots hover effect */
+.timeline-dot:hover {
+  transform: scale(1.1) translateY(-15px); /* Keep vertical offset while scaling */
+}
+
+.timeline-dot.experience-dot:hover {
+  transform: scale(1.1) translateY(15px); /* Keep vertical offset while scaling */
+}
+
+/* Dot icons */
+.dot-icon {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Modern Glass Cards */
+.timeline-card {
+  background: rgba(10, 25, 47, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 20px rgba(100, 255, 218, 0.05),
+    0 0 40px rgba(31, 38, 135, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.timeline-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 
+    0 10px 20px -5px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(100, 255, 218, 0.15);
+}
+
+/* Modern Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.timeline-card {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Modern Meta Information */
+.education-meta,
+.experience-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.year,
+.location,
+.duration {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .timeline-header-row {
+    grid-template-columns: minmax(300px, 1fr) 80px minmax(300px, 1fr);
+  }
+  
+  .timeline-header-label {
+    font-size: 2rem;
+  }
+  
+  .timeline-header-label::after {
+    width: 100px;
+  }
+}
+
+@media (max-width: 900px) {
+  .timeline-header-row {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .timeline-header-label.education-label,
+  .timeline-header-label.experience-label {
+    text-align: center;
+    margin: 0;
+  }
+  
+  .timeline-header-label::after {
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  }
+}
+
+@media (max-width: 700px) {
+  .timeline-header-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .timeline-header-center {
+    display: none;
+  }
+  .timeline-main-grid {
+    flex-direction: column;
+  }
+  .timeline-row {
+    grid-template-columns: 1fr;
+  }
+  .timeline-center {
+    display: none;
+  }
+  .timeline-vertical-main {
+    display: none;
+  }
+  .timeline-side {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 1200px) {
+  .timeline-card {
+    padding: 1.5rem;
+  }
+  
+  .timeline-header-label {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-card {
+    margin: 1rem 0;
+  }
+  
+  .tech-stack {
+    gap: 0.5rem;
+  }
+  
+  .tech-tag {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}

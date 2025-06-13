@@ -1,48 +1,55 @@
 import React from 'react';
 import './About.css';
+import joelImg from '../assets/joel.jpg';  // Update import to use new image
+import useScrollReveal from '../hooks/useScrollReveal';
+import AnimatedLine from './AnimatedLine';
+import TechGlobe from './TechGlobe';
 
 function About() {
+  const imageRef = useScrollReveal();
+  const contentRef = useScrollReveal();
+
   return (
     <section className="about-section">
-      <div className="about-content">
-        <div className="services">
-          <div className="service-item">
-            <span className="service-icon">💻</span>
-            <h3>Website Development</h3>
-          </div>
-          <div className="service-item">
-            <span className="service-icon">📱</span>
-            <h3>App Development</h3>
-          </div>
-          <div className="service-item">
-            <span className="service-icon">🌐</span>
-            <h3>Website Hosting</h3>
-          </div>
+      <div className="about-content" style={{ display: 'flex', alignItems: 'center', gap: '3rem' }}>
+        {/* Left: Image */}
+        <div ref={imageRef} className="about-image reveal-fade-right">
+          <img  
+            src={joelImg}
+            alt="Joel Rayton"
+            className="profile-image"
+          />
         </div>
-        
-        <div className="about-text">
-          <h2>About me</h2>
-          <p>
-            I started my software journey from photography. Through that, I learned to
-            love the process of creating from scratch. Since then, this has led me to
-            software development as I fulfill my love for learning and building things.
+        {/* Right: About Details */}
+        <div ref={contentRef} className="about-text reveal-fade-left" style={{ flex: 1 }}>
+          <h2 className="section-heading">// About Me</h2>
+          <p className="about-description">
+            I'm <span className="highlight">Joel Rayton</span>, a Software Engineer and Full Stack Developer with a strong foundation in both front-end and back-end development. I hold a Bachelor of Science in Computer Science from Bicol University Polangui, where I developed a passion for building meaningful and scalable software solutions.<br /><br />
+            I value clean code, intuitive user experiences, and the opportunity to solve complex problems with efficient solutions. I'm always eager to learn new technologies and contribute to impactful projects.
           </p>
-          <div className="stats">
-            <div className="stat-item">
-              <span className="stat-number">120<span className="plus">+</span></span>
-              <span className="stat-label">Completed Projects</span>
+
+          {/* Quick Facts Section */}
+          <div className="quick-facts">
+            <div className="fact-item">
+              <span className="fact-title">🎓 Degree</span>
+              <span className="fact-detail">BS Computer Science</span>
             </div>
-            <div className="stat-item">
-              <span className="stat-number">95<span className="percent">%</span></span>
-              <span className="stat-label">Client satisfaction</span>
+            <div className="fact-item">
+              <span className="fact-title">🏅 Distinction</span>
+              <span className="fact-detail">Cum Laude</span>
             </div>
-            <div className="stat-item">
-              <span className="stat-number">10<span className="plus">+</span></span>
-              <span className="stat-label">Years of experience</span>
+            <div className="fact-item">
+              <span className="fact-title">🏆 Award</span>
+              <span className="fact-detail">Best Thesis: Vision.AI</span>
             </div>
+            
           </div>
+
+          <h2 className="section-heading">// My Skills</h2>
+          <TechGlobe />
         </div>
       </div>
+      <AnimatedLine />
     </section>
   );
 }
