@@ -10,7 +10,7 @@ function Education() {
 
   return (
     <>
-      <section className="education-section">
+      <section id="education" className="education-section">
         <div className="container">
           <h2 ref={titleRef} className="section-title reveal-element">
             Education

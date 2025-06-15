@@ -68,7 +68,7 @@ function Experience() {
 
   return (
     <>
-      <section className="experience-section">
+      <section id="experience" className="experience-section">
         <div className="container">
           <h2 ref={titleRef} className="section-title reveal-element">
             Experience

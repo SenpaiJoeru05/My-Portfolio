@@ -1,55 +1,69 @@
+/* Section styling */
 .projects-section {
-  padding: 6rem 0;
-  background-color: var(--secondary);
+  background: linear-gradient(180deg, #0a192f, #112240);
   min-height: 100vh;
 }
 
+/* Container styling */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 2rem;
 }
 
+/* Section title */
 .section-title {
   color: var(--primary);
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
+  font-size: 3rem;
+  margin-bottom: 4rem;
   text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
+/* Projects grid */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 2.5rem;
 }
 
+/* Project card styling */
 .project-card {
-  background: #112240;
-  border-radius: 12px;
+  background: rgba(17, 34, 64, 0.9);
+  border-radius: 16px;
   overflow: hidden;
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s ease-in-out;
   border: 1px solid rgba(100, 255, 218, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .project-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
+/* Project image */
 .project-image {
   position: relative;
   overflow: hidden;
+  height: 200px;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.5s ease;
 }
 
 .project-card:hover .project-image img {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
+/* Project links overlay */
 .project-links {
   position: absolute;
   inset: 0;
@@ -59,8 +73,8 @@
   gap: 1rem;
   background: rgba(10, 25, 47, 0.9);
   opacity: 0;
-  backdrop-filter: blur(4px);
-  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  transition: all 0.4s ease;
 }
 
 .project-card:hover .project-links {
@@ -69,7 +83,7 @@
 
 .project-links a {
   padding: 0.8rem 1.5rem;
-  border-radius: 4px;
+  border-radius: 8px;
   background: var(--primary);
   color: var(--secondary);
   text-decoration: none;
@@ -77,60 +91,82 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transform: translateY(20px);
   transition: all 0.3s ease;
 }
 
-.project-card:hover .project-links a {
-  transform: translateY(0);
+.project-links a:hover {
+  background: rgba(100, 255, 218, 0.8);
 }
 
+/* Project info */
 .project-info {
-  padding: 1.5rem;
+  padding: 2rem;
 }
 
 .project-info h3 {
   color: var(--text-primary);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-bottom: 1rem;
+  font-weight: 600;
 }
 
 .project-info p {
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 1.5rem;
+  font-size: 1rem;
 }
 
+/* Tech stack */
 .project-tech {
   display: flex;
-  gap: 0.8rem;
-  flex-wrap: wrap;
+  gap: 1rem;
+  flex-wrap: wrap; /* Ensure items wrap properly */
 }
 
-.tech-item {
-  padding: 0.4rem 1rem;
+/* Updated class name for tech items */
+.project-tech-item {
+  padding: 0.5rem 1rem;
   border-radius: 50px;
   background: rgba(100, 255, 218, 0.1);
   color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   transition: all 0.3s ease;
 }
 
-.tech-item:hover {
+.project-tech-item:hover {
   background: rgba(100, 255, 218, 0.2);
-  transform: translateY(-2px) scale(1.05);
+  transform: translateY(-2px);
 }
 
-.tech-item svg {
-  width: 1.2em;
-  height: 1.2em;
-}
-
-.tech-item span {
-  color: var(--text-secondary);
+/* Fix overlapping issue */
+.project-tech-item {
+  white-space: nowrap; /* Prevent text wrapping inside tech items */
 }
 
 @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
+  }
+
+  .project-info h3 {
+    font-size: 1.5rem;
+  }
+
+  .project-info p {
+    font-size: 0.9rem;
+  }
+
+  .project-tech {
+    gap: 0.5rem; /* Reduce gap for smaller screens */
+  }
+
+  .project-tech-item {
+    font-size: 0.85rem; /* Adjust font size for smaller screens */
+    padding: 0.4rem 0.8rem; /* Adjust padding for smaller screens */
   }
 }

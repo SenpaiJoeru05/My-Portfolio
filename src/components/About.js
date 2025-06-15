@@ -10,7 +10,7 @@ function About() {
   const contentRef = useScrollReveal();
 
   return (
-    <section className="about-section">
+    <section id="about" className="about-section">
       <div className="about-content" style={{ display: 'flex', alignItems: 'center', gap: '3rem' }}>
         {/* Left: Image */}
         <div ref={imageRef} className="about-image reveal-fade-right">
@@ -40,7 +40,7 @@ function About() {
             </div>
             <div className="fact-item">
               <span className="fact-title">🏆 Award</span>
-              <span className="fact-detail">Best Thesis: Vision.AI</span>
+              <span className="fact-detail">Best Thesis: <span className="highlight">Vision.AI</span></span>
             </div>
             
           </div>

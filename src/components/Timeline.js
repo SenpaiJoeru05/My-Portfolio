@@ -24,7 +24,7 @@ const timelineRows = [
 			type: 'experience',
 			title: 'Full Stack Developer Intern',
 			company: 'Philippine Statistics Authority',
-			duration: 'June 2023 - December 2023',
+			duration: 'June 2023 - August 2023',
 			location: 'Legazpi City',
 			details: [
 				'Developed and maintained web applications using Laravel and MySQL',
@@ -56,7 +56,7 @@ const timelineRows = [
 
 function Timeline() {
 	return (
-		<section className="timeline-section">
+		<section id="timeline" className="timeline-section">
 			<div className="timeline-headers-wrapper">
 				<div className="timeline-header-row">
 					<div className="timeline-header-label education-label">
@@ -115,20 +115,17 @@ function Timeline() {
 						{/* Center: Connector, Dot */}
 						<div className="timeline-center">
 							{row.left && (
-								<>
+								<div className="dot-container">
 									<div className="timeline-horizontal-connector left-connector"></div>
-									<div className="timeline-dot education-dot">
-										<span className="dot-icon">🎓</span>
-									</div>
-								</>
+									{/* Updated dot elements */}
+									<div className="timeline-dot education-dot"></div>
+								</div>
 							)}
 							{row.right && (
-								<>
-									<div className="timeline-dot experience-dot">
-										<span className="dot-icon">💼</span>
-									</div>
+								<div className="dot-container">
+									<div className="timeline-dot experience-dot"></div>
 									<div className="timeline-horizontal-connector right-connector"></div>
-								</>
+								</div>
 							)}
 						</div>
 						{/* Right: Experience */}

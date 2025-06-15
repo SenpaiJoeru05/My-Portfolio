@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joel Rayton - Software Engineer</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #0d0d0d;
+      font-family: 'Courier New', monospace;
+      color: #00ffcc;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .overlay h1 {
+      font-size: 3rem;
+      margin: 0.5rem 0;
+    }
+
+    .overlay h2 {
+      font-size: 2rem;
+      color: #ffffff;
+      margin: 0.5rem 0;
+    }
+
+    .overlay p {
+      max-width: 600px;
+      margin: 1rem auto;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+
+    .overlay a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #00ffcc;
+      color: #0d0d0d;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .overlay a:hover {
+      background: #00ccaa;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="networkCanvas"></canvas>
+  <div class="overlay">
+    <h1>Hello, my name is</h1>
+    <h2>Joel Rayton.</h2>
+    <h1>I am <span id="typewriter"></span></h1>
+    <p>I'm a Computer Science graduate passionate about building AI-powered and scalable software solutions. I thrive at the intersection of AI, mobile, and full-stack development.</p>
+    <a href="#">View Resume</a>
+  </div>
+
+  <script>
+    // Typewriter effect
+    const roles = ["Software Engineer", "Full Stack Developer", "AI Enthusiast", "Mobile App Developer"];
+    let currentRole = 0;
+    let charIndex = 0;
+    const typewriter = document.getElementById("typewriter");
+
+    function type() {
+      if (charIndex < roles[currentRole].length) {
+        typewriter.textContent += roles[currentRole].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 100);
+      } else {
+        setTimeout(erase, 2000);
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        typewriter.textContent = roles[currentRole].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, 50);
+      } else {
+        currentRole = (currentRole + 1) % roles.length;
+        setTimeout(type, 300);
+      }
+    }
+
+    type();
+
+    // Connected node animation (network effect)
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const nodes = Array.from({ length: 80 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00ffcc';
+
+      nodes.forEach(node => {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        nodes.forEach(other => {
+          const dx = node.x - other.x;
+          const dy = node.y - other.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.strokeStyle = `rgba(0, 255, 204, ${1 - dist / 100})`;
+            ctx.beginPath();
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.stroke();
+          }
+        });
+
+        node.x += node.vx;
+        node.y += node.vy;
+
+        if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+        if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>

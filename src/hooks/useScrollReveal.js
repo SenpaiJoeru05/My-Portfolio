@@ -1,7 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 
 const useScrollReveal = (options = {}) => {
   const elementRef = useRef(null);
+
+  // Memoize options to prevent unnecessary effect re-runs
+  const memoizedOptions = useMemo(() => options, [
+    JSON.stringify(options)
+  ]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -13,7 +18,7 @@ const useScrollReveal = (options = {}) => {
       });
     }, {
       threshold: 0.1,
-      ...options
+      ...memoizedOptions
     });
 
     const element = elementRef.current;
@@ -26,7 +31,7 @@ const useScrollReveal = (options = {}) => {
         observer.unobserve(element);
       }
     };
-  }, [options]);
+  }, [memoizedOptions]);
 
   return elementRef;
 };

@@ -69,7 +69,7 @@
   top: 0;
   right: 0;
   width: 40%;
-  height: calc(100% - 8.5rem); /* Adjusted to align with tech list line */
+  height: calc(103% - 8.5rem); /* Adjusted to align with tech list line */
   z-index: 1;
   overflow: hidden;
   margin-bottom: 0; /* Remove margin */
@@ -81,7 +81,7 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
-  opacity: 1;
+  opacity: 0.5;
   filter: brightness(0.9) contrast(1.1);
   mix-blend-mode: normal;
 
@@ -101,12 +101,7 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--secondary) 0%,
-    rgba(10, 25, 47, 0.8) 20%,
-    rgba(10, 25, 47, 0.6) 100%
-  );
+  background: linear-gradient(90deg, var(--secondary) 0%, rgba(10, 25, 47, 0.724) 20%, rgba(10, 25, 47, 0.889) 100%);
   z-index: 2;
 }
 
@@ -125,6 +120,7 @@
   flex: 1;
   animation: fadeIn 1s ease-out;
   max-width: 600px;
+  margin-left: 5rem; /* Add a left margin */
 }
 
 .greeting {
@@ -175,6 +171,7 @@
   cursor: pointer;
   transition: var(--transition);
   font-weight: 500;
+  text-decoration: none; /* Remove underline */
 }
 
 .btn-primary {
@@ -186,17 +183,20 @@
 .btn-primary:hover {
   background: #4ad3b3;
   transform: translateY(-2px);
+  text-decoration: none; /* Remove underline on hover */
 }
 
 .btn-outline {
   background: transparent;
   border: 1px solid var(--primary);
   color: var(--primary);
+  text-decoration: none; /* Remove underline */
 }
 
 .btn-outline:hover {
   background: rgba(100, 255, 218, 0.1);
   transform: translateY(-2px);
+  text-decoration: none; /* Remove underline on hover */
 }
 
 .hero-image {

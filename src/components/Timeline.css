@@ -1,5 +1,5 @@
 .timeline-section {
-  padding: 4rem 0;
+  padding: 2rem 0;
   background: var(--secondary);
 }
 
@@ -26,10 +26,11 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  font-size: 2rem;
+  font-size: 2.5rem; /* Increased font size */
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: var(--primary); /* Changed color to cyan */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Added subtle text shadow */
 }
 
 /* Specific alignments */
@@ -163,7 +164,7 @@
   z-index: 1;
 }
 
-/* Center column with dots and connectors */
+/* Update center column with dots and connectors */
 .timeline-center {
   position: relative;
   width: 120px;
@@ -171,83 +172,89 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 30px; /* Increased gap between dots */
+  gap: 180px; /* Adjusted gap for better spacing */
 }
 
-/* Dot positioning and styling */
+/* Dot container positioning */
+.dot-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 32px; /* Match dot height */
+  top: 150px;
+}
+
+/* Dot styling */
 .timeline-dot {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
 }
 
-/* Education dot specific styles */
+/* Education dot */
 .timeline-dot.education-dot {
-  transform: translateY(-15px); /* Move education dot up */
   background: radial-gradient(
     circle at center,
     #3b82f6 0%,
     rgba(59, 130, 246, 0.8) 50%,
     transparent 100%
   );
-  box-shadow: 
-    0 0 0 4px rgba(59, 130, 246, 0.1),
-    0 0 10px rgba(59, 130, 246, 0.3);
 }
 
-/* Experience dot specific styles */
+/* Experience dot */
 .timeline-dot.experience-dot {
-  transform: translateY(15px); /* Move experience dot down */
   background: radial-gradient(
     circle at center,
     #22d3ee 0%,
     rgba(34, 211, 238, 0.8) 50%,
     transparent 100%
   );
-  box-shadow: 
-    0 0 0 4px rgba(34, 211, 238, 0.1),
-    0 0 10px rgba(34, 211, 238, 0.3);
 }
 
-/* Horizontal connectors */
+
+/* Update horizontal connectors */
 .timeline-horizontal-connector {
   position: absolute;
-  width: 50px;
   height: 3px;
+  width: 60px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 2;
 }
 
 .left-connector {
-  right: 50%;
-  /* Position relative to education dot */
-  transform: translateY(-50%);
-  top: calc(50% - 15px); /* Align with education dot */
+  right: calc(50% + 16px); /* Align with dot's left edge */
   background: linear-gradient(90deg, transparent, #3b82f6);
 }
 
 .right-connector {
-  left: calc(50% + 16px); /* Start from the edge of the dot */
-  /* Position relative to experience dot */
-  transform: translateY(-50%);
-  top: calc(50% + 15px); /* Align with experience dot */
+  left: calc(50% + 16px); /* Align with dot's right edge */
   background: linear-gradient(90deg, #22d3ee, transparent);
 }
 
-/* Dots hover effect */
-.timeline-dot:hover {
-  transform: scale(1.1) translateY(-15px); /* Keep vertical offset while scaling */
+/* Add glow effect to connectors */
+.timeline-horizontal-connector::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(4px);
+  opacity: 0.5;
 }
 
-.timeline-dot.experience-dot:hover {
-  transform: scale(1.1) translateY(15px); /* Keep vertical offset while scaling */
-}
+
 
 /* Dot icons */
 .dot-icon {
@@ -275,8 +282,19 @@
   transform: translateY(-5px);
   border-color: var(--primary);
   box-shadow: 
-    0 10px 20px -5px rgba(0, 0, 0, 0.2),
-    0 0 30px rgba(100, 255, 218, 0.15);
+    0 10px 20px -5px rgba(0, 0, 0, 0.3), /* Increased shadow intensity */
+    0 0 30px rgba(100, 255, 218, 0.25); /* Increased glow intensity */
+}
+
+.timeline-card.education-card {
+  position: relative;
+  top: -80px; 
+}
+
+.timeline-card.experience-card {
+  position: relative;
+  top: 80px;
+  width: 100%;
 }
 
 /* Modern Animations */
@@ -313,6 +331,20 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+/* Experience Details */
+.experience-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experience-details li {
+  position: relative;
+  padding-left: 1.2em; /* Space for bullet/icon */
+  margin-bottom: 0.5em;
+  word-break: break-word; /* Prevent overflow */
 }
 
 /* Responsive adjustments */
