@@ -9,7 +9,7 @@
 
 .line-glow {
   position: absolute;
-  width: 1000px;  /* Increased from 200px to make the line longer */
+  width: 1000px; 
   height: 200%;
   background: linear-gradient(
     90deg,
@@ -22,7 +22,7 @@
 
 @keyframes moveLine {
   0% {
-    transform: translateX(-1000px);  /* Match this to the width value above */
+    transform: translateX(-1000px); 
   }
   100% {
     transform: translateX(100vw);

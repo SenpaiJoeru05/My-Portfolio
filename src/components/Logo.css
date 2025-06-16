@@ -1,0 +1,30 @@
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image {
+  width: 80px;
+  height: 80px;
+  transition: var(--transition);
+  object-fit: contain;
+}
+
+.logo:hover .logo-image {
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+  .logo-image {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .logo-image {
+    width: 35px;
+    height: 35px;
+  }
+}

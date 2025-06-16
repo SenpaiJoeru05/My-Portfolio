@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Hero.css';
 import backgroundVideo from '../assets/Test1.mp4';
 import Logo from './Logo';
@@ -8,6 +8,8 @@ import Pdf from '../assets/CVJoelRayton.pdf';
 import NetworkingLines from './NetworkingLines'; // Import the new component
 
 function Hero() {
+  const [navOpen, setNavOpen] = useState(false);
+
   return (
     <section id='hero' className="hero-section">
       <NetworkingLines /> {/* Add the NetworkingLines component here */}
@@ -20,11 +22,22 @@ function Hero() {
       
       <nav className="navbar">
         <Logo />
-        <div className="nav-links">
-          <a href="#home"><span className="nav-number">I.</span>Home</a>
-          <a href="#about"><span className="nav-number">II.</span>About</a>
-          <a href="#projects"><span className="nav-number">III.</span>Projects</a>
-          <a href="#contact"><span className="nav-number">IV.</span>Contact</a>
+        <div
+          className={`burger-menu${navOpen ? ' open' : ''}`}
+          onClick={() => setNavOpen(!navOpen)}
+          aria-label="Toggle navigation"
+          tabIndex={0}
+          role="button"
+        >
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className={`nav-links${navOpen ? ' active' : ''}`}>
+          <a href="#home" onClick={() => setNavOpen(false)}><span className="nav-number">I.</span>Home</a>
+          <a href="#about" onClick={() => setNavOpen(false)}><span className="nav-number">II.</span>About</a>
+          <a href="#projects" onClick={() => setNavOpen(false)}><span className="nav-number">III.</span>Projects</a>
+          <a href="#contact" onClick={() => setNavOpen(false)}><span className="nav-number">IV.</span>Contact</a>
         </div>
       </nav>
 
@@ -63,7 +76,6 @@ function Hero() {
         <div className="hero-tech-item">HTML5</div>
         <div className="hero-tech-item">CSS</div>
         <div className="hero-tech-item">JavaScript</div>
-        <div className="hero-tech-item">Node.js</div>
         <div className="hero-tech-item">React</div>
         <div className="hero-tech-item">Git</div>
         <div className="hero-tech-item">GitHub</div>

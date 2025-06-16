@@ -192,7 +192,6 @@
   
 .quick-facts {
   display: flex;
-  flex-wrap: wrap;
   gap: 2rem;
   margin: 1.5rem 0;
   justify-content: flex-start;

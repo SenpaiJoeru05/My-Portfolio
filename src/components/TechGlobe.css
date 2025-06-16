@@ -43,10 +43,11 @@
 .about-globe-container {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 450px; /* Increased from 400px */
   perspective: 1200px;
   transform-style: preserve-3d;
   overflow: visible;
+  touch-action: none; /* Prevents default touch actions */
 }
 
 .about-globe-container:active {
@@ -101,15 +102,49 @@
 }
 
 /* Responsive adjustments */
+@media (max-width: 1200px) {
+  .about-globe-container {
+    height: 400px;
+  }
+}
+
+@media (max-width: 968px) {
+  .about-globe-container {
+    height: 350px;
+  }
+}
+
 @media (max-width: 768px) {
+  .about-globe-container {
+    height: 300px; /* Increased from 250px */
+  }
+  
   .about-globe-tech-item img {
-    width: 24px;
+    width: 28px; /* Increased from 24px */
+    height: 28px;
+    max-width: 28px;
+    max-height: 28px;
+  }
+  
+  .about-globe-tech-item p {
+    font-size: 10px; /* Increased from 9px */
+    margin-top: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-globe-container {
+    height: 280px; /* Increased from 200px */
+  }
+  
+  .about-globe-tech-item img {
+    width: 24px; /* Increased from 20px */
     height: 24px;
     max-width: 24px;
     max-height: 24px;
   }
   
   .about-globe-tech-item p {
-    font-size: 10px;
+    font-size: 9px; /* Increased from 8px */
   }
 }

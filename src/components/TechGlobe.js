@@ -15,11 +15,6 @@ const defaultTechItems = [
   { name: 'Livewire', icon: 'https://laravel-livewire.com/img/favicon.png' }, // Custom, may need adjustment
   { name: 'Laravel', icon: 'https://img.icons8.com/ios-filled/50/ffffff/laravel.png' },
   { name: 'FilamentPHP', icon: 'https://avatars.githubusercontent.com/u/75367858' },
-  { name: 'shadcn/ui', icon: 'https://raw.githubusercontent.com/shadcn/ui/main/apps/www/public/favicon.ico' }, // Custom, fallback to React+Tailwind
-  { name: 'Lucide Icons', icon: 'https://lucide.dev/favicon.ico' }, // Custom
-  { name: 'Framer Motion', icon: 'https://seeklogo.com/images/F/framer-motion-logo-DA1E33CAA1-seeklogo.com.png' },
-  { name: 'Recharts', icon: 'https://react-chartjs-2.js.org/img/logo.svg' },
-  { name: 'MapLibre', icon: 'https://maplibre.org/assets/favicon.png' },
   { name: 'Ultralytics', icon: 'https://cdn.prod.website-files.com/646dd1f1a3703e451ba81ecc/64777c3e071ec953437e6950_logo.svg' },
   { name: 'ONNX', icon: 'https://onnx.ai/img/favicon.ico' },
   { name: 'TensorFlow Lite', icon: 'https://www.tensorflow.org/images/tf_logo_social.png' },
@@ -27,8 +22,6 @@ const defaultTechItems = [
   { name: 'Kotlin', icon: 'https://img.icons8.com/color/48/kotlin.png' },
   { name: 'Git', icon: 'https://img.icons8.com/color/48/git.png' },
   { name: 'GitHub', icon: 'https://img.icons8.com/ios-glyphs/48/ffffff/github.png' },
-  { name: 'OSRM', icon: 'https://www.project-osrm.org/favicon.ico' }, // Routing icon
-  { name: 'GraphHopper', icon: 'https://www.graphhopper.com/favicon.ico' },
   { name: 'Figma', icon: 'https://img.icons8.com/color/48/figma--v1.png' },
 ];
 
@@ -40,8 +33,8 @@ function TechGlobe({ techItems = defaultTechItems }) {
     if (!globe) return;
     globe.innerHTML = '';
 
-    const radius = Math.min(globe.clientWidth, globe.clientHeight) * 0.4; // Adjust sphere size
-    const dampingFactor = 0.98; // Controls how quickly rotation slows down
+    let radius = Math.min(globe.clientWidth, globe.clientHeight) * 0.4; // Adjust sphere size
+    const dampingFactor = 0.95; // Slightly faster slowdown
     let center = { x: globe.clientWidth / 2, y: globe.clientHeight / 2 };
     const positions = fibonacciSphere(techItems.length);
     const elements = [];
@@ -50,7 +43,7 @@ function TechGlobe({ techItems = defaultTechItems }) {
     let last3D = null;
     let autoRotateMatrix = null;
     let idleSpinAxis = randomAxis();
-    let idleSpinSpeed = 0.002;
+    let idleSpinSpeed = window.innerWidth < 768 ? 0.001 : 0.002; // Slower on mobile
     let velocity = 0;
     let lastAxis = [0, 0, 1];
     let lastTime = null;
@@ -297,11 +290,59 @@ function TechGlobe({ techItems = defaultTechItems }) {
       }
     }
 
+    // Touch event handlers with better sensitivity
+    function handleTouchStart(e) {
+      if (e.touches.length === 1) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        onPointerDown({
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+      }
+    }
+
+    function handleTouchMove(e) {
+      if (e.touches.length === 1) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        onPointerMove({
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+      }
+    }
+
+    function handleTouchEnd(e) {
+      e.preventDefault();
+      onPointerUp();
+    }
+
+    // Update the radius calculation to be responsive
+    function updateRadius() {
+      const width = globe.clientWidth;
+      const height = globe.clientHeight;
+      radius = Math.min(width, height) * (width < 768 ? 0.40 : 0.4); // Smaller radius on mobile
+      center = { x: width / 2, y: height / 2 };
+    }
+
+    // Add resize observer for smooth size updates
+    const resizeObserver = new ResizeObserver(() => {
+      updateRadius();
+      updatePositions();
+    });
+
+    resizeObserver.observe(globe);
+
     // Attach pointer events to the globe container itself
     globe.addEventListener('pointerdown', onPointerDown);
     window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('pointerup', onPointerUp);
     window.addEventListener('pointerleave', onPointerUp);
+    globe.addEventListener('touchstart', handleTouchStart, { passive: false });
+    globe.addEventListener('touchmove', handleTouchMove, { passive: false });
+    globe.addEventListener('touchend', handleTouchEnd);
+    globe.addEventListener('touchcancel', handleTouchEnd);
     window.addEventListener('resize', () => {
       center = { x: globe.clientWidth / 2, y: globe.clientHeight / 2 };
     });
@@ -312,9 +353,14 @@ function TechGlobe({ techItems = defaultTechItems }) {
     return () => {
       globe.innerHTML = '';
       globe.removeEventListener('pointerdown', onPointerDown);
+      globe.removeEventListener('touchstart', handleTouchStart);
+      globe.removeEventListener('touchmove', handleTouchMove);
+      globe.removeEventListener('touchend', handleTouchEnd);
+      globe.removeEventListener('touchcancel', handleTouchEnd);
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerup', onPointerUp);
       window.removeEventListener('pointerleave', onPointerUp);
+      resizeObserver.disconnect();
     };
   }, [techItems]);
 

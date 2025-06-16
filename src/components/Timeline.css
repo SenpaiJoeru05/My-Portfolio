@@ -116,7 +116,6 @@
 .timeline-main-grid {
   display: flex;
   flex-direction: column;
-  gap: 3rem; /* Increased gap between rows */
   max-width: 1200px; /* Increased max-width for better spacing */
   margin: 0 auto;
   position: relative;
@@ -268,61 +267,80 @@
   background: rgba(10, 25, 47, 0.7);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(100, 255, 218, 0.1);
+  border-radius: 16px;
+  padding: 2.5rem;
+  max-width: 400px; /* Control card width */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
-    0 0 20px rgba(100, 255, 218, 0.05),
-    0 0 40px rgba(31, 38, 135, 0.1);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    0 0 20px rgba(100, 255, 218, 0.05);
 }
 
 .timeline-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
   border-color: var(--primary);
   box-shadow: 
-    0 10px 20px -5px rgba(0, 0, 0, 0.3), /* Increased shadow intensity */
-    0 0 30px rgba(100, 255, 218, 0.25); /* Increased glow intensity */
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(100, 255, 218, 0.2),
+    0 0 60px rgba(100, 255, 218, 0.1);
 }
 
-.timeline-card.education-card {
-  position: relative;
-  top: -80px; 
-}
-
+.timeline-card.education-card,
 .timeline-card.experience-card {
-  position: relative;
-  top: 80px;
-  width: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
-/* Modern Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-    filter: blur(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
+/* Logo styles for both education and experience */
+.school-logo,
+.company-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white;
+  padding: 0.5rem;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.timeline-card {
-  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.timeline-card:hover .school-logo,
+.timeline-card:hover .company-logo {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(100, 255, 218, 0.3);
 }
 
-/* Modern Meta Information */
+/* Content styles for both cards */
+.education-content,
+.experience-content {
+  flex: 1;
+}
+
+.education-content h3,
+.experience-content h3 {
+  color: var(--text-primary);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.school-name,
+.company-name {
+  color: var(--primary);
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Meta information styles */
 .education-meta,
 .experience-meta {
   display: flex;
   gap: 1.5rem;
   margin-bottom: 1.5rem;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary);
 }
 
 .year,
@@ -331,9 +349,106 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 0.95rem;
 }
 
-/* Experience Details */
+/* List styles */
+.achievements,
+.experience-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.achievements li,
+.experience-details li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-secondary);
+  transition: transform 0.2s ease, padding-left 0.2s ease;
+}
+
+.achievements li::before,
+.experience-details li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+.timeline-card:hover .achievements li,
+.timeline-card:hover .experience-details li {
+  transform: translateX(5px);
+  padding-left: 1.8rem;
+}
+
+/* Card positioning */
+.timeline-card.education-card {
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.timeline-card.experience-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  max-width: 400px;
+  margin-left: 2rem;
+  background: rgba(10, 25, 47, 0.7);
+  border-radius: 16px;
+  border: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+/* Experience content container */
+.experience-content {
+  width: 100%;
+}
+
+.experience-header {
+  margin-bottom: 1rem;
+}
+
+.experience-header h3 {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.company {
+  color: var(--primary);
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Update logo styles */
+.company-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white;
+  padding: 0.5rem;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.company-logo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(100, 255, 218, 0.3);
+}
+
+/* Meta information */
+.experience-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+
+/* List items */
 .experience-details {
   list-style: none;
   padding: 0;
@@ -341,10 +456,79 @@
 }
 
 .experience-details li {
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
   position: relative;
-  padding-left: 1.2em; /* Space for bullet/icon */
-  margin-bottom: 0.5em;
-  word-break: break-word; /* Prevent overflow */
+  color: var(--text-secondary);
+  line-height: 1.5;
+  transition: transform 0.2s ease, padding-left 0.2s ease;
+}
+
+.experience-details li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.timeline-card:hover .experience-details li {
+  transform: translateX(5px);
+  padding-left: 1.8rem;
+}
+
+/* Tech stack */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.tech-tag {
+  background: rgba(100, 255, 218, 0.1);
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.tech-tag:hover {
+  transform: translateY(-2px);
+  background: rgba(100, 255, 218, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .timeline-card.experience-card {
+    max-width: 350px;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-card.experience-card {
+    flex-direction: column;
+    padding: 1.5rem;
+    margin: 1rem;
+    max-width: 100%;
+  }
+
+  .company-logo {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+  }
+
+  .experience-content h3 {
+    font-size: 1.3rem;
+  }
 }
 
 /* Responsive adjustments */
@@ -431,4 +615,308 @@
     padding: 0.4rem 0.8rem;
     font-size: 0.85rem;
   }
+}
+
+/* Add at the end of your file */
+
+/* Mobile Timeline Styles */
+.timeline-mobile {
+  display: none;
+  padding: 1rem;
+}
+
+.mobile-section {
+  margin-bottom: 2.5rem;
+}
+
+.mobile-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 0;
+  position: relative; /* For positioning the underline */
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+}
+
+.mobile-header h2 {
+  color: var(--primary);
+  font-size: 2rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.mobile-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 200px;
+  background: var(--primary);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+}
+
+/* Different gradients for education and experience headers */
+.mobile-header.education::after {
+  background: linear-gradient(90deg, #3b82f6, transparent);
+}
+
+.mobile-header.experience::after {
+  background: linear-gradient(90deg, #22d3ee, transparent);
+}
+
+.mobile-card {
+  background: rgba(10, 25, 47, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 20px rgba(100, 255, 218, 0.05);
+}
+
+.mobile-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(100, 255, 218, 0.2),
+    0 0 60px rgba(100, 255, 218, 0.1);
+}
+
+/* Add glass effect to card content */
+.mobile-institution {
+  color: var(--primary);
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.mobile-meta {
+  background: rgba(10, 25, 47, 0.5);
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+/* Update experience card styles */
+.timeline-card.experience-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  max-width: 400px;
+  margin-left: 2rem;
+}
+
+.company-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white;
+  padding: 0.5rem;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.company-logo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(100, 255, 218, 0.3);
+}
+
+.experience-content {
+  width: 100%;
+}
+
+.experience-content h3 {
+  color: var(--text-primary);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.company-name {
+  color: var(--primary);
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Separate duration and location */
+.experience-meta,
+.location-meta {
+  display: flex;
+  gap: 1.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.duration,
+.location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* Add more spacing before details */
+.experience-details {
+  margin-top: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timeline-card.experience-card {
+    padding: 1.5rem;
+  }
+
+  .company-logo {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+  }
+
+  .experience-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .company-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .mobile-header::after {
+    width: 150px; /* Shorter line for mobile */
+  }
+  
+  .mobile-header-icon {
+    font-size: 1.5rem;
+  }
+  
+  .mobile-card {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .mobile-tech-tag {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+  
+  .mobile-meta {
+    padding: 0.6rem;
+  }
+}
+
+/* Add animation for tech stack */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.tech-tag {
+  background: rgba(100, 255, 218, 0.1);
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.tech-tag:hover {
+  transform: translateY(-2px);
+  background: rgba(100, 255, 218, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add hover effects for mobile cards */
+.mobile-card {
+  background: rgba(10, 25, 47, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 20px rgba(100, 255, 218, 0.05);
+}
+
+.mobile-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(100, 255, 218, 0.2),
+    0 0 60px rgba(100, 255, 218, 0.1);
+}
+
+/* Add hover effects for mobile logos */
+.mobile-company-logo,
+.mobile-school-logo {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mobile-card:hover .mobile-company-logo,
+.mobile-card:hover .mobile-school-logo {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(100, 255, 218, 0.3);
+}
+
+/* Add animation for mobile tech stack */
+.mobile-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.mobile-tech-tag {
+  background: rgba(100, 255, 218, 0.1);
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.mobile-tech-tag:hover {
+  transform: translateY(-2px);
+  background: rgba(100, 255, 218, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add subtle text animations */
+.timeline-card h3,
+.mobile-card h3 {
+  transition: color 0.3s ease;
+}
+
+.timeline-card:hover h3,
+.mobile-card:hover h3 {
+  color: var(--primary);
 }
