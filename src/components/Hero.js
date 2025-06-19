@@ -4,7 +4,7 @@ import backgroundVideo from '../assets/Test1.mp4';
 import Logo from './Logo';
 import AnimatedLine from './AnimatedLine';
 import { Typewriter } from 'react-simple-typewriter';
-import Pdf from '../assets/CVJoelRayton.pdf';
+import Pdf from '../assets/CV/CVJoelRaytonFullstack.pdf';
 import NetworkingLines from './NetworkingLines'; // Import the new component
 
 function Hero() {

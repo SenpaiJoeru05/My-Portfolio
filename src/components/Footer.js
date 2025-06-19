@@ -3,12 +3,12 @@ import './Footer.css';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { HiMail } from 'react-icons/hi';
 import Logo from './Logo';
-import Pdf from '../assets/CVJoelRayton.pdf';
+import Pdf from '../assets/CV/CVJoelRaytonFullstack.pdf';
 
 function Footer() {
   const handleResume = () => {
     // Add your resume PDF URL or download logic here
-    window.open('/path-to-your-resume.pdf', '_blank');
+    window.open(Pdf, '_blank');
   };
 
   const scrollToContact = () => {
