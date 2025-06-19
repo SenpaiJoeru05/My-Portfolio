@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/My-Portfolio/static/css/main.7a6912f3.css",
-    "main.js": "/My-Portfolio/static/js/main.b3441e5e.js",
+    "main.js": "/My-Portfolio/static/js/main.ebac1fc1.js",
     "static/js/453.acca0757.chunk.js": "/My-Portfolio/static/js/453.acca0757.chunk.js",
     "static/media/Test1.mp4": "/My-Portfolio/static/media/Test1.24feda1f2b6cd4a87595.mp4",
     "static/media/AccreHub.png": "/My-Portfolio/static/media/AccreHub.49adfd536b5ccc06f195.png",
     "static/media/bicol-logo.png": "/My-Portfolio/static/media/bicol-logo.24abf9d70c50bba75e85.png",
     "static/media/Portfolio.png": "/My-Portfolio/static/media/Portfolio.532716b9f147d2604f4c.png",
     "static/media/joel.jpg": "/My-Portfolio/static/media/joel.ac007c1bc02732972195.jpg",
-    "static/media/CVJoelRayton.pdf": "/My-Portfolio/static/media/CVJoelRayton.170f8bf7329a925201ef.pdf",
+    "static/media/CVJoelRaytonFullstack.pdf": "/My-Portfolio/static/media/CVJoelRaytonFullstack.b4f30e347ef2ac37fcdb.pdf",
     "static/media/PSA-Logo.png": "/My-Portfolio/static/media/PSA-Logo.e39e8d1f50a9e95ca30a.png",
     "static/media/VisionAI.png": "/My-Portfolio/static/media/VisionAI.e9c1e67f2f303c1128a9.png",
     "static/media/Logo.png": "/My-Portfolio/static/media/Logo.7bff61589adb97bf073c.png",
     "index.html": "/My-Portfolio/index.html",
     "main.7a6912f3.css.map": "/My-Portfolio/static/css/main.7a6912f3.css.map",
-    "main.b3441e5e.js.map": "/My-Portfolio/static/js/main.b3441e5e.js.map",
+    "main.ebac1fc1.js.map": "/My-Portfolio/static/js/main.ebac1fc1.js.map",
     "453.acca0757.chunk.js.map": "/My-Portfolio/static/js/453.acca0757.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7a6912f3.css",
-    "static/js/main.b3441e5e.js"
+    "static/js/main.ebac1fc1.js"
   ]
 }
