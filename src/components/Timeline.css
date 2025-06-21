@@ -116,17 +116,17 @@
 .timeline-main-grid {
   display: flex;
   flex-direction: column;
-  max-width: 1200px; /* Increased max-width for better spacing */
+  max-width: 1200px; 
   margin: 0 auto;
   position: relative;
-  padding: 0 2rem; /* Added padding to prevent cards touching screen edges */
+  padding: 0 2rem; 
 }
 
 /* Timeline row layout */
 .timeline-row {
   display: grid;
   grid-template-columns: minmax(400px, 1fr) 120px minmax(400px, 1fr);
-  align-items: flex-start; /* Changed from center to flex-start */
+  align-items: flex-start; 
   position: relative;
   margin-bottom: 3rem;
 }
@@ -140,12 +140,12 @@
 
 .timeline-side.left {
   justify-content: flex-end;
-  padding-right: 60px; /* Space for connector */
+  padding-right: 60px; 
 }
 
 .timeline-side.right {
   justify-content: flex-start;
-  padding-left: 60px; /* Space for connector */
+  padding-left: 60px; 
 }
 
 /* Vertical timeline */
@@ -171,7 +171,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 180px; /* Adjusted gap for better spacing */
+  gap: 180px; 
 }
 
 /* Dot container positioning */
@@ -180,7 +180,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  height: 32px; /* Match dot height */
+  height: 32px; 
   top: 150px;
 }
 
@@ -231,12 +231,12 @@
 }
 
 .left-connector {
-  right: calc(50% + 16px); /* Align with dot's left edge */
+  right: calc(50% + 16px); 
   background: linear-gradient(90deg, transparent, #3b82f6);
 }
 
 .right-connector {
-  left: calc(50% + 16px); /* Align with dot's right edge */
+  left: calc(50% + 16px); 
   background: linear-gradient(90deg, #22d3ee, transparent);
 }
 
@@ -269,7 +269,7 @@
   border: 1px solid rgba(100, 255, 218, 0.1);
   border-radius: 16px;
   padding: 2.5rem;
-  max-width: 400px; /* Control card width */
+  max-width: 400px;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -563,6 +563,15 @@
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  }
+}
+
+@media (max-width: 700px) {
+  .timeline-desktop {
+    display: none !important;
+  }
+  .timeline-mobile {
+    display: block !important;
   }
 }
 
@@ -919,4 +928,87 @@
 .timeline-card:hover h3,
 .mobile-card:hover h3 {
   color: var(--primary);
+}
+
+@media (max-width: 700px) {
+  .mobile-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.2rem 1rem 0.5rem 1rem;
+  }
+  .mobile-card-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .mobile-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .mobile-card-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: var(--primary);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .mobile-course {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+  .mobile-card-body {
+    width: 100%;
+    margin-top: 0.7rem;
+  }
+  .mobile-meta-row {
+    display: flex;
+    gap: 1.2rem;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.2rem;
+  }
+  .mobile-details {
+    font-size: 0.95rem;
+    margin: 0.5rem 0 1.2rem 0;
+    padding-left: 0;
+    list-style: none;
+    width: 100%;
+  }
+  .mobile-details li {
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 1.2rem;
+  }
+  .mobile-details li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .mobile-school-logo,
+  .mobile-company-logo {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 12px;
+    background: white;
+    padding: 0.3rem;
+    object-fit: contain;
+    margin-bottom: 0;
+    margin-right: 0.8rem;
+    box-shadow: 0 2px 8px rgba(34,211,238,0.08);
+    display: block;
+  }
 }

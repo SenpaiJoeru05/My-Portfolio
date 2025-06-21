@@ -14,43 +14,45 @@ const timelineRows = [
 			duration: '2021 - 2025',
 			location: 'Polangui, Philippines',
 			details: [
-				'Major in Software Development and AI',
 				"Dean's Lister with Academic Excellence",
-				'Core Team Member of BU Computing Society',
-				'Research: Vision.AI - Mobile Object Detection using YOLOv8',
-				'Led development team for university web projects',
+				"Best Thesis Awardee: Vision.AI (Assistive App for the Visually Impaired)",
+				"Developer of Vision.AI, an Android app for the visually impaired using YOLOv8, TensorFlow Lite, and OpenCV",
+				"Active participant in academic and programming competitions",
+				"Completed coursework in software engineering, databases, and AI",
 			],
 		},
 		right: {
 			type: 'experience',
 			title: 'Full Stack Developer Intern',
 			company: 'Philippine Statistics Authority Region V',
-			duration: 'June 2023 - August 2023',
-			location: 'Legazpi City',
+			duration: 'June 2024 - August 2024',
+			location: 'Legazpi City, Philippines',
 			details: [
-				'Developed and maintained web applications using Laravel and MySQL',
-				'Implemented responsive UI designs and improved user experience',
-				'Collaborated with statisticians to create data visualization tools',
-				'Assisted in database management and optimization',
+				"Spearheaded the design, development, testing, and deployment of PSA-HRIS, a web-based HR system for the agency",
+				"Built secure backend (Laravel, PHP, PostgreSQL) and responsive frontend (HTML, CSS, JS, FilamentPHP)",
+				"Collaborated with PSA IT staff for requirements gathering and user training",
+				"Implemented data visualization and reporting features for HR analytics",
+				"Maintained documentation and provided technical support during rollout",
 			],
-			tech: ['Laravel', 'PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
+			tech: ['Laravel', 'PHP', 'PostgreSQL', 'HTML', 'CSS', 'JavaScript', 'FilamentPHP'],
 		},
 	},
 	{
 		left: null,
 		right: {
 			type: 'experience',
-			title: 'Freelance Developer',
+			title: 'Freelance Full Stack Developer',
 			company: 'Self-employed',
-			duration: '2022 - Present',
-			location: 'Remote',
+			duration: '2024 - Present',
+			location: 'Ligao City, Philippines',
 			details: [
-				'Built custom websites and web applications for various clients',
-				'Developed mobile applications using React Native',
-				'Provided technical consulting and solutions architecture',
-				'Managed project timelines and client communications',
+				"Developed AccreHub, an accreditation file management system for a local school client",
+				"Handled the full project lifecycle: requirements, design, development, deployment, and training",
+				"Built secure web applications using Laravel, PHP, PostgreSQL, HTML, CSS, JavaScript, and FilamentPHP",
+				"Delivered user-friendly dashboards and document management features",
+				"Provided ongoing support and enhancements based on client feedback",
 			],
-			tech: ['React', 'React Native', 'Node.js', 'MongoDB', 'AWS'],
+			tech: ['Laravel', 'PHP', 'PostgreSQL', 'HTML', 'CSS', 'JavaScript', 'FilamentPHP'],
 		},
 	},
 ];
@@ -181,26 +183,31 @@ function Timeline() {
 						<span className="mobile-header-icon">🎓</span>
 						<h2>Education</h2>
 					</div>
-
 					<div className="mobile-card">
-						<img
-							src={bicolLogo}
-							alt="Bicol University"
-							className="mobile-school-logo"
-						/>
-						<h3>Bachelor of Science in Computer Science</h3>
-						<div className="mobile-institution">Bicol University</div>
-						<div className="mobile-meta">
-							<span>📅 2021 - 2025</span>
-							<span>📍 Polangui, Philippines</span>
+						<div className="mobile-card-top">
+							<img
+								src={bicolLogo}
+								alt="Bicol University"
+								className="mobile-school-logo"
+							/>
+							<div className="mobile-card-header">
+								<h3>Bicol University</h3>
+								<div className="mobile-course">Bachelor of Science in Computer Science</div>
+							</div>
 						</div>
-						<ul className="mobile-details">
-							<li>Major in Software Development and AI</li>
-							<li>Dean's Lister with Academic Excellence</li>
-							<li>Core Team Member of BU Computing Society</li>
-							<li>Research: Vision.AI - Mobile Object Detection using YOLOv8</li>
-							<li>Led development team for university web projects</li>
-						</ul>
+						<div className="mobile-card-body">
+							<div className="mobile-meta-row">
+								<span>📅 2021 - 2025</span>
+								<span>📍 Polangui, Philippines</span>
+							</div>
+							<ul className="mobile-details">
+								<li>Dean's Lister with Academic Excellence</li>
+								<li>Best Thesis Awardee: Vision.AI (Assistive App for the Visually Impaired)</li>
+								<li>Developer of Vision.AI, an Android app for the visually impaired using YOLOv8, TensorFlow Lite, and OpenCV</li>
+								<li>Active participant in academic and programming competitions</li>
+								<li>Completed coursework in software engineering, databases, and AI</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 
@@ -213,52 +220,67 @@ function Timeline() {
 
 					{/* First Experience Card */}
 					<div className="mobile-card">
-						<img
-							src={psaLogo}
-							alt="PSA Logo"
-							className="mobile-company-logo"
-						/>
-						<h3>Philippine Statistics Authority</h3>
-						<div className="mobile-institution">Full Stack Developer Intern</div>
-						<div className="mobile-meta">
-							<span>📅 June 2023 - August 2023</span>
-							<span>📍 Legazpi City</span>
+						<div className="mobile-card-top">
+							<img
+								src={psaLogo}
+								alt="PSA Logo"
+								className="mobile-company-logo"
+							/>
+							<div className="mobile-card-header">
+								<h3>Philippine Statistics Authority Region V</h3>
+								<div className="mobile-course">Full Stack Developer Intern</div>
+							</div>
 						</div>
-						<ul className="mobile-details">
-							<li>Developed and maintained web applications using Laravel and MySQL</li>
-							<li>Implemented responsive UI designs and improved user experience</li>
-							<li>Collaborated with statisticians to create data visualization tools</li>
-							<li>Assisted in database management and optimization</li>
-						</ul>
-						<div className="mobile-tech-stack">
-							{['Laravel', 'PHP', 'MySQL', 'JavaScript', 'Bootstrap'].map((tech, i) => (
-								<span key={i} className="mobile-tech-tag">
-									{tech}
-								</span>
-							))}
+						<div className="mobile-card-body">
+							<div className="mobile-meta-row">
+								<span>📅 June 2024 - August 2024</span>
+								<span>📍 Legazpi City, Philippines</span>
+							</div>
+							<ul className="mobile-details">
+								<li>Spearheaded the design, development, testing, and deployment of PSA-HRIS, a web-based HR system for the agency</li>
+								<li>Built secure backend (Laravel, PHP, PostgreSQL) and responsive frontend (HTML, CSS, JS, FilamentPHP)</li>
+								<li>Collaborated with PSA IT staff for requirements gathering and user training</li>
+								<li>Implemented data visualization and reporting features for HR analytics</li>
+								<li>Maintained documentation and provided technical support during rollout</li>
+							</ul>
+							<div className="mobile-tech-stack">
+								{['Laravel', 'PHP', 'PostgreSQL', 'HTML', 'CSS', 'JavaScript', 'FilamentPHP'].map((tech, i) => (
+									<span key={i} className="mobile-tech-tag">
+										{tech}
+									</span>
+								))}
+							</div>
 						</div>
 					</div>
 
 					{/* Second Experience Card */}
 					<div className="mobile-card">
-						<h3>Freelance Developer</h3>
-						<div className="mobile-institution">Self-employed</div>
-						<div className="mobile-meta">
-							<span>📅 2022 - Present</span>
-							<span>📍 Remote</span>
+						<div className="mobile-card-top">
+							{/* No logo for this card */}
+							<div className="mobile-card-header">
+								<h3>Self-employed</h3>
+								<div className="mobile-course">Freelance Full Stack Developer</div>
+							</div>
 						</div>
-						<ul className="mobile-details">
-							<li>Built custom websites and web applications for various clients</li>
-							<li>Developed mobile applications using React Native</li>
-							<li>Provided technical consulting and solutions architecture</li>
-							<li>Managed project timelines and client communications</li>
-						</ul>
-						<div className="mobile-tech-stack">
-							{['React', 'React Native', 'Node.js', 'MongoDB', 'AWS'].map((tech, i) => (
-								<span key={i} className="mobile-tech-tag">
-									{tech}
-								</span>
-							))}
+						<div className="mobile-card-body">
+							<div className="mobile-meta-row">
+								<span>📅 2024 - Present</span>
+								<span>📍 Ligao City, Philippines</span>
+							</div>
+							<ul className="mobile-details">
+								<li>Developed AccreHub, an accreditation file management system for a local school client</li>
+								<li>Handled the full project lifecycle: requirements, design, development, deployment, and training</li>
+								<li>Built secure web applications using Laravel, PHP, PostgreSQL, HTML, CSS, JavaScript, and FilamentPHP</li>
+								<li>Delivered user-friendly dashboards and document management features</li>
+								<li>Provided ongoing support and enhancements based on client feedback</li>
+							</ul>
+							<div className="mobile-tech-stack">
+								{['Laravel', 'PHP', 'PostgreSQL', 'HTML', 'CSS', 'JavaScript', 'FilamentPHP'].map((tech, i) => (
+									<span key={i} className="mobile-tech-tag">
+										{tech}
+									</span>
+								))}
+							</div>
 						</div>
 					</div>
 				</div>
