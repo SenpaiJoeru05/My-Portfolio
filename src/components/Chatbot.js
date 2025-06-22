@@ -399,10 +399,11 @@ export default function Chatbot() {
 						overflow: "hidden",
 						border: `2.5px solid ${accent}`,
 						opacity: open ? 1 : 0,
-						// Remove transform here, let animation handle it!
 						pointerEvents: open ? "auto" : "none",
 						transition: "opacity 0.3s",
-						transformOrigin: "bottom right", // Anchor to button
+						transformOrigin: "bottom right",
+						height: 500, // <-- add a fixed height for desktop, or use 100% for mobile
+						minHeight: 350,
 					}}
 				>
 					{/* Header with Icon */}
@@ -449,9 +450,10 @@ export default function Chatbot() {
 					</div>
 					{/* Messages */}
 					<div
+						className="messages-area" // <-- Add this!
 						style={{
-							flex: 1,
-							padding: "20px 18px 0 18px",
+							flex: "1 1 0",
+							padding: "20px 18px 0 18px", // Remove bottom padding!
 							overflowY: "auto",
 							background: "rgba(10,25,47,0.98)",
 							minHeight: 180,
@@ -459,6 +461,9 @@ export default function Chatbot() {
 							transition: "background 0.2s",
 							fontSize: 15,
 							borderBottom: `1px solid ${accent}`,
+							display: "flex",
+							flexDirection: "column",
+							justifyContent: "flex-end",
 						}}
 					>
 						{messages.map((msg, i) => (
@@ -502,7 +507,7 @@ export default function Chatbot() {
 						<div ref={messagesEndRef} />
 					</div>
 
-					{/* Suggestions Carousel (auto-running) */}
+					{/* Suggestions Carousel */}
 					<div
 						style={{
 							display: "flex",
@@ -512,6 +517,7 @@ export default function Chatbot() {
 							borderBottom: `1.5px solid ${accent}`,
 							padding: "0 10px",
 							minHeight: 54,
+							margin: 0, // Remove margin
 						}}
 					>
 						<div
@@ -532,10 +538,19 @@ export default function Chatbot() {
 								<button
 									key={i}
 									onClick={() => {
+										// Capture current scroll position
+										const el = suggestionsRef.current;
+										const prevScroll = el ? el.scrollLeft : 0;
+
 										const userMsg = { from: "user", text: s };
 										const botMsg = { from: "bot", text: getBotResponse(s) };
 										setMessages((msgs) => [...msgs, userMsg, botMsg]);
 										setInput("");
+
+										// Restore scroll position after DOM updates
+										setTimeout(() => {
+											if (el) el.scrollLeft = prevScroll;
+										}, 0);
 									}}
 									style={{
 										background: "rgba(100,255,218,0.13)",
@@ -564,9 +579,10 @@ export default function Chatbot() {
 						style={{
 							display: "flex",
 							gap: 6,
-							padding: "16px 18px",
+							padding: "12px 10px", // Reduce padding
 							background: darkBg2,
 							borderTop: `1.5px solid ${accent}`,
+							margin: 0, // Remove margin
 						}}
 					>
 						<input
@@ -607,7 +623,7 @@ export default function Chatbot() {
 
 			{/* Keyframes for fadeIn and scale animations */}
 			<style>
-				{`
+                {`
           @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px);}
             to { opacity: 1; transform: translateY(0);}
@@ -641,9 +657,7 @@ export default function Chatbot() {
             }
           }
           .chatbot-window {
-            /* ...existing styles... */
             transform-origin: calc(100% - 28px) calc(100% - 28px);
-            /* This anchors the animation to the icon's center */
           }
           .chatbot-window.scale-in {
             animation: scaleIn 0.32s cubic-bezier(.4,1.4,.6,1) both;
@@ -660,8 +674,75 @@ export default function Chatbot() {
           .chatbot-link:hover {
             color: #2d8cff;
           }
+
+          /* --- Responsive styles for mobile --- */
+          @media (max-width: 600px) {
+            .chatbot-window {
+              width: 92vw !important;
+              max-width: 400px !important;
+              min-width: 0 !important;
+              height: 68vh !important;
+              max-height: 80vh !important;
+              left: 50% !important;
+              right: auto !important;
+              transform: translateX(-50%) !important;
+              border-radius: 18px !important;
+              box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+              border-width: 2px !important;
+              z-index: 1002;
+              display: flex !important;
+              flex-direction: column !important;
+              padding: 0 !important;
+              margin: 0 !important;
+            }
+            .chatbot-window .messages-area {
+              flex: 1 1 0 !important;
+              padding: 12px 8px 0 8px !important;
+              font-size: 14px !important;
+              min-height: 0 !important;
+              max-height: none !important;
+              display: flex !important;
+              flex-direction: column !important;
+              justify-content: flex-end !important;
+            }
+            .chatbot-window form {
+              padding: 14px 10px 10px 10px !important; /* More padding for comfort */
+              margin: 0 !important;
+              gap: 10px !important; /* More space between input and button */
+              background: #112240 !important;
+              border-radius: 0 0 16px 16px !important;
+              box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+            }
+            .chatbot-window form input {
+              padding: 14px 14px !important; /* More vertical padding */
+              font-size: 16px !important;
+              border-radius: 12px !important;
+              min-height: 44px !important;
+            }
+            .chatbot-window form button[type="submit"] {
+              padding: 0 26px !important;
+              font-size: 16px !important;
+              min-height: 44px !important;
+              border-radius: 12px !important;
+              font-weight: 700 !important;
+              box-shadow: 0 2px 8px rgba(100,255,218,0.10);
+            }
+            .chatbot-window .suggestions-carousel {
+              min-height: 44px !important;
+              padding: 0 2px !important;
+              margin: 0 !important;
+            }
+          }
+          /* Make suggestion carousel easier to scroll on touch */
+          .chatbot-window .suggestions-carousel {
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+          }
+          .chatbot-window .suggestions-carousel::-webkit-scrollbar {
+            display: none;
+          }
         `}
-			</style>
-		</>
-	);
+            </style>
+        </>
+    );
 }
