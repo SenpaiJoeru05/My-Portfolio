@@ -17,8 +17,7 @@ const timelineRows = [
 				"Dean's Lister with Academic Excellence",
 				"Best Thesis Awardee: Vision.AI (Assistive App for the Visually Impaired)",
 				"Developer of Vision.AI, an Android app for the visually impaired using YOLOv8, TensorFlow Lite, and OpenCV",
-				"Active participant in academic and programming competitions",
-				"Completed coursework in software engineering, databases, and AI",
+				"Graduated Cum Laude with a GPA of 1.75",
 			],
 		},
 		right: {
@@ -30,7 +29,7 @@ const timelineRows = [
 			details: [
 				"Spearheaded the design, development, testing, and deployment of PSA-HRIS, a web-based HR system for the agency",
 				"Built secure backend (Laravel, PHP, PostgreSQL) and responsive frontend (HTML, CSS, JS, FilamentPHP)",
-				"Collaborated with PSA IT staff for requirements gathering and user training",
+				"Collaborated with my intern team and PSA staff for requirements gathering and user training",
 				"Implemented data visualization and reporting features for HR analytics",
 				"Maintained documentation and provided technical support during rollout",
 			],
@@ -47,7 +46,7 @@ const timelineRows = [
 			location: 'Ligao City, Philippines',
 			details: [
 				"Developed AccreHub, an accreditation file management system for a local school client",
-				"Handled the full project lifecycle: requirements, design, development, deployment, and training",
+				"Designed and implemented a user-friendly dashboard for managing accreditation documents",
 				"Built secure web applications using Laravel, PHP, PostgreSQL, HTML, CSS, JavaScript, and FilamentPHP",
 				"Delivered user-friendly dashboards and document management features",
 				"Provided ongoing support and enhancements based on client feedback",
