@@ -206,17 +206,18 @@ function getBotResponse(input) {
 }
 
 export default function Chatbot() {
-	const [messages, setMessages] = useState([
-		{ from: "bot", text: "👋 Hi! I'm Joel's portfolio bot. Ask me anything about Joel Rayton." },
-	]);
-	const [input, setInput] = useState("");
-	const [open, setOpen] = useState(false);
-	const [animating, setAnimating] = useState(false);
-	const messagesEndRef = useRef(null);
-	const suggestionsRef = useRef(null);
-	const [isHovered, setIsHovered] = useState(false);
+    const [messages, setMessages] = useState([
+        { from: "bot", text: "👋 Hi! I'm Joel's portfolio bot. Ask me anything about Joel Rayton." },
+    ]);
+    const [input, setInput] = useState("");
+    const [open, setOpen] = useState(false);
+    const [animating, setAnimating] = useState(false);
+    const [isClosing, setIsClosing] = useState(false); // NEW
+    const messagesEndRef = useRef(null);
+    const suggestionsRef = useRef(null);
+    const [isHovered, setIsHovered] = useState(false);
 
-	const suggestionList = [
+    const suggestionList = [
 		"What are your skills?",
 		"Show me your projects",
 		"Tell me about your experience",
@@ -233,13 +234,13 @@ export default function Chatbot() {
 		const el = suggestionsRef.current;
 		if (!el) return;
 		let running = true;
-		const scrollStep = 1; // pixels per frame
-		const scrollDelay = 20; // ms per frame
+		const scrollStep = 1; 
+		const scrollDelay = 20; 
 
 		function animate() {
 			if (!running || isHovered) return;
 			if (el.scrollLeft + el.offsetWidth >= el.scrollWidth - 1) {
-				el.scrollLeft = 0; // Loop back to start
+				el.scrollLeft = 0; 
 			} else {
 				el.scrollLeft += scrollStep;
 			}
@@ -257,17 +258,20 @@ export default function Chatbot() {
 
 	// Animation for open/close
 	const handleOpen = () => {
-		setAnimating(true);
-		setOpen(true);
-		setTimeout(() => setAnimating(false), 300);
-	};
-	const handleClose = () => {
-		setAnimating(true);
-		setTimeout(() => {
-			setOpen(false);
-			setAnimating(false);
-		}, 300);
-	};
+        setIsClosing(false);
+        setAnimating(true);
+        setOpen(true);
+        setTimeout(() => setAnimating(false), 300);
+    };
+    const handleClose = () => {
+        setIsClosing(true); 
+        setAnimating(true);
+        setTimeout(() => {
+            setOpen(false);
+            setAnimating(false);
+            setIsClosing(false); // Reset after animation
+        }, 300);
+    };
 
 	const sendMessage = (e) => {
 		e.preventDefault();
@@ -371,6 +375,13 @@ export default function Chatbot() {
 			{/* Chatbot Window with animation */}
 			{(open || animating) && (
 				<div
+					className={
+						animating
+							? isClosing
+								? "chatbot-window scale-out"
+								: "chatbot-window scale-in"
+							: "chatbot-window"
+					}
 					style={{
 						position: "fixed",
 						bottom: 32,
@@ -378,7 +389,7 @@ export default function Chatbot() {
 						width: 370,
 						maxWidth: "98vw",
 						background: darkBg,
-						color: "#fff",
+					 color: "#fff",
 						borderRadius: 22,
 						boxShadow: "0 8px 32px rgba(100,255,218,0.18)",
 						zIndex: 1002,
@@ -388,9 +399,10 @@ export default function Chatbot() {
 						overflow: "hidden",
 						border: `2.5px solid ${accent}`,
 						opacity: open ? 1 : 0,
-						transform: open ? "translateY(0)" : "translateY(40px)",
+						// Remove transform here, let animation handle it!
 						pointerEvents: open ? "auto" : "none",
-						transition: "opacity 0.3s, transform 0.3s",
+						transition: "opacity 0.3s",
+						transformOrigin: "bottom right", // Anchor to button
 					}}
 				>
 					{/* Header with Icon */}
@@ -593,12 +605,51 @@ export default function Chatbot() {
 				</div>
 			)}
 
-			{/* Keyframes for fadeIn animation */}
+			{/* Keyframes for fadeIn and scale animations */}
 			<style>
 				{`
           @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px);}
             to { opacity: 1; transform: translateY(0);}
+          }
+          @keyframes scaleIn {
+            from { 
+              transform: scale(0.3) translate(170px, 170px);
+              opacity: 0.2;
+              box-shadow: 0 0 0 rgba(100,255,218,0.00);
+              border-radius: 50%;
+            }
+            to { 
+              transform: scale(1) translate(0, 0);
+              opacity: 1;
+              box-shadow: 0 8px 32px rgba(100,255,218,0.18);
+              border-radius: 22px;
+            }
+          }
+          @keyframes scaleOut {
+            from { 
+              transform: scale(1) translate(0, 0);
+              opacity: 1;
+              box-shadow: 0 8px 32px rgba(100,255,218,0.18);
+              border-radius: 22px;
+            }
+            to { 
+              transform: scale(0.3) translate(170px, 170px);
+              opacity: 0;
+              box-shadow: 0 0 0 rgba(100,255,218,0.00);
+              border-radius: 50%;
+            }
+          }
+          .chatbot-window {
+            /* ...existing styles... */
+            transform-origin: calc(100% - 28px) calc(100% - 28px);
+            /* This anchors the animation to the icon's center */
+          }
+          .chatbot-window.scale-in {
+            animation: scaleIn 0.32s cubic-bezier(.4,1.4,.6,1) both;
+          }
+          .chatbot-window.scale-out {
+            animation: scaleOut 0.32s cubic-bezier(.4,1.4,.6,1) both;
           }
           .chatbot-link {
             color: #64ffda;
