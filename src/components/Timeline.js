@@ -17,7 +17,7 @@ const timelineRows = [
 				"Dean's Lister with Academic Excellence",
 				"Best Thesis Awardee: Vision.AI (Assistive App for the Visually Impaired)",
 				"Developer of Vision.AI, an Android app for the visually impaired using YOLOv8, TensorFlow Lite, and OpenCV",
-				"Graduated Cum Laude with a GPA of 1.75",
+				"Graduated Cum Laude with a GPA of 1.60",
 			],
 		},
 		right: {
