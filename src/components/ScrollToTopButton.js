@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./ScrollToTopButton.css";
+import "./ScrollToTopButton.css"; // Ensure you have the CSS for styling
 
 const ScrollToTopButton = () => {
   const [visible, setVisible] = useState(false);
@@ -29,10 +29,9 @@ const ScrollToTopButton = () => {
         fill="none"
         aria-hidden="true"
       >
-        <circle cx="12" cy="12" r="12" fill="#fff" opacity="0.15" />
         <path
           d="M12 16V8M12 8L8 12M12 8l4 4"
-          stroke="#0078FF"
+          stroke="#64ffda"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

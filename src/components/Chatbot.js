@@ -212,7 +212,7 @@ export default function Chatbot() {
     const [input, setInput] = useState("");
     const [open, setOpen] = useState(false);
     const [animating, setAnimating] = useState(false);
-    const [isClosing, setIsClosing] = useState(false); // NEW
+    const [isClosing, setIsClosing] = useState(false);
     const messagesEndRef = useRef(null);
     const suggestionsRef = useRef(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -234,13 +234,13 @@ export default function Chatbot() {
 		const el = suggestionsRef.current;
 		if (!el) return;
 		let running = true;
-		const scrollStep = 1; 
-		const scrollDelay = 20; 
+		const scrollStep = 1;
+		const scrollDelay = 20;
 
 		function animate() {
 			if (!running || isHovered) return;
 			if (el.scrollLeft + el.offsetWidth >= el.scrollWidth - 1) {
-				el.scrollLeft = 0; 
+				el.scrollLeft = 0;
 			} else {
 				el.scrollLeft += scrollStep;
 			}
@@ -264,12 +264,12 @@ export default function Chatbot() {
         setTimeout(() => setAnimating(false), 300);
     };
     const handleClose = () => {
-        setIsClosing(true); 
+        setIsClosing(true);
         setAnimating(true);
         setTimeout(() => {
             setOpen(false);
             setAnimating(false);
-            setIsClosing(false); // Reset after animation
+            setIsClosing(false);
         }, 300);
     };
 
@@ -294,28 +294,9 @@ export default function Chatbot() {
 			{!open && (
 				<button
 					onClick={handleOpen}
-					style={{
-						position: "fixed",
-						bottom: 32,
-						right: 32,
-						background: accentGradient,
-						color: "#0a192f",
-						border: "none",
-						borderRadius: "50%",
-						width: 56,
-						height: 56,
-						boxShadow: "0 4px 24px rgba(100,255,218,0.18)",
-						fontSize: 28,
-						cursor: "pointer",
-						zIndex: 1001,
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-						transition: "background 0.2s",
-					}}
+					className="chatbot-button"
 					aria-label="Open chat"
 				>
-					{/* Modern robot SVG icon */}
 					<svg
 						width="32"
 						height="32"
@@ -382,124 +363,35 @@ export default function Chatbot() {
 								: "chatbot-window scale-in"
 							: "chatbot-window"
 					}
-					style={{
-						position: "fixed",
-						bottom: 32,
-						right: 32,
-						width: 370,
-						maxWidth: "98vw",
-						background: darkBg,
-					 color: "#fff",
-						borderRadius: 22,
-						boxShadow: "0 8px 32px rgba(100,255,218,0.18)",
-						zIndex: 1002,
-						padding: 0,
-						display: "flex",
-						flexDirection: "column",
-						overflow: "hidden",
-						border: `2.5px solid ${accent}`,
-						opacity: open ? 1 : 0,
-						pointerEvents: open ? "auto" : "none",
-						transition: "opacity 0.3s",
-						transformOrigin: "bottom right",
-						height: 500, // <-- add a fixed height for desktop, or use 100% for mobile
-						minHeight: 350,
-					}}
 				>
 					{/* Header with Icon */}
-					<div
-						style={{
-							background: accentGradient,
-							color: darkBg,
-							padding: "18px 26px 18px 20px",
-							fontWeight: 700,
-							fontSize: 20,
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "space-between",
-							borderBottom: `1.5px solid ${accent}`,
-						}}
-					>
+					<div className="chatbot-header">
 						<span style={{ display: "flex", alignItems: "center", gap: 10 }}>
-							{/* Robot Icon */}
 							<svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-							  <rect x="4" y="8" width="16" height="10" rx="4" fill="#0a192f" stroke="#64ffda" strokeWidth="2"/>
-							  <circle cx="8.5" cy="13" r="1.5" fill="#64ffda"/>
-							  <circle cx="15.5" cy="13" r="1.5" fill="#64ffda"/>
-							  <rect x="10" y="2" width="4" height="4" rx="2" fill="#64ffda"/>
-							  <rect x="2" y="12" width="2" height="4" rx="1" fill="#64ffda"/>
-							  <rect x="20" y="12" width="2" height="4" rx="1" fill="#64ffda"/>
+								<rect x="4" y="8" width="16" height="10" rx="4" fill="#0a192f" stroke="#64ffda" strokeWidth="2"/>
+								<circle cx="8.5" cy="13" r="1.5" fill="#64ffda"/>
+								<circle cx="15.5" cy="13" r="1.5" fill="#64ffda"/>
+								<rect x="10" y="2" width="4" height="4" rx="2" fill="#64ffda"/>
+								<rect x="2" y="12" width="2" height="4" rx="1" fill="#64ffda"/>
+								<rect x="20" y="12" width="2" height="4" rx="1" fill="#64ffda"/>
 							</svg>
 							JoelBot
 						</span>
 						<button
 							onClick={handleClose}
-							style={{
-								background: "transparent",
-								border: "none",
-								color: darkBg,
-								fontSize: 26,
-								cursor: "pointer",
-								marginLeft: 8,
-								fontWeight: 700,
-							}}
 							aria-label="Close chat"
 						>
-							×
+							× 
 						</button>
 					</div>
 					{/* Messages */}
-					<div
-						className="messages-area" // <-- Add this!
-						style={{
-							flex: "1 1 0",
-							padding: "20px 18px 0 18px", // Remove bottom padding!
-							overflowY: "auto",
-							background: "rgba(10,25,47,0.98)",
-							minHeight: 180,
-							maxHeight: 300,
-							transition: "background 0.2s",
-							fontSize: 15,
-							borderBottom: `1px solid ${accent}`,
-							display: "flex",
-							flexDirection: "column",
-							justifyContent: "flex-end",
-						}}
-					>
+					<div className="messages-area">
 						{messages.map((msg, i) => (
 							<div
 								key={i}
-								style={{
-									display: "flex",
-									justifyContent: msg.from === "user" ? "flex-end" : "flex-start",
-									margin: "8px 0",
-									animation: "fadeIn 0.4s",
-									animationDelay: `${i * 0.04}s`,
-									animationFillMode: "backwards",
-								}}
+								className={`message ${msg.from === "user" ? "user-message" : "bot-message"}`}
 							>
-								<span
-									style={{
-										background: msg.from === "user"
-											? accentGradient
-											: darkBg2,
-										color: msg.from === "user" ? darkBg : accent,
-										borderRadius: msg.from === "user"
-											? "20px 20px 8px 20px"
-											: "20px 20px 20px 8px",
-										padding: "10px 16px",
-										fontSize: 15,
-										maxWidth: "80%",
-										boxShadow: msg.from === "user"
-											? "0 2px 8px rgba(100,255,218,0.10)"
-											: "0 2px 8px rgba(100,255,218,0.08)",
-										wordBreak: "break-word",
-										lineHeight: 1.6,
-										border: msg.from === "user"
-											? `1.5px solid ${accent}`
-											: `1.5px solid ${darkBg2}`,
-									}}
-								>
+								<span>
 									{typeof msg.text === "string" ? msg.text : msg.text}
 								</span>
 							</div>
@@ -508,29 +400,9 @@ export default function Chatbot() {
 					</div>
 
 					{/* Suggestions Carousel */}
-					<div
-						style={{
-							display: "flex",
-							alignItems: "center",
-							background: darkBg2,
-							borderTop: `1.5px solid ${accent}`,
-							borderBottom: `1.5px solid ${accent}`,
-							padding: "0 10px",
-							minHeight: 54,
-							margin: 0, // Remove margin
-						}}
-					>
+					<div className="suggestions-carousel">
 						<div
 							ref={suggestionsRef}
-							style={{
-								display: "flex",
-								overflowX: "auto",
-								gap: 10,
-								flex: 1,
-								scrollbarWidth: "none",
-								msOverflowStyle: "none",
-								scrollBehavior: "smooth",
-							}}
 							onMouseEnter={() => setIsHovered(true)}
 							onMouseLeave={() => setIsHovered(false)}
 						>
@@ -538,32 +410,15 @@ export default function Chatbot() {
 								<button
 									key={i}
 									onClick={() => {
-										// Capture current scroll position
 										const el = suggestionsRef.current;
 										const prevScroll = el ? el.scrollLeft : 0;
-
 										const userMsg = { from: "user", text: s };
 										const botMsg = { from: "bot", text: getBotResponse(s) };
 										setMessages((msgs) => [...msgs, userMsg, botMsg]);
 										setInput("");
-
-										// Restore scroll position after DOM updates
 										setTimeout(() => {
 											if (el) el.scrollLeft = prevScroll;
 										}, 0);
-									}}
-									style={{
-										background: "rgba(100,255,218,0.13)",
-										color: accent,
-										border: `1.5px solid ${accent}`,
-										borderRadius: 18,
-										padding: "6px 18px",
-										fontSize: 14,
-										cursor: "pointer",
-										whiteSpace: "nowrap",
-										transition: "background 0.2s, color 0.2s",
-										margin: "8px 0",
-										fontWeight: 500,
 									}}
 									type="button"
 								>
@@ -576,57 +431,25 @@ export default function Chatbot() {
 					{/* Input */}
 					<form
 						onSubmit={sendMessage}
-						style={{
-							display: "flex",
-							gap: 6,
-							padding: "12px 10px", // Reduce padding
-							background: darkBg2,
-							borderTop: `1.5px solid ${accent}`,
-							margin: 0, // Remove margin
-						}}
+						className="chatbot-input-form"
 					>
 						<input
 							id="chatbot-input"
 							value={input}
 							onChange={(e) => setInput(e.target.value)}
 							placeholder="Ask me about Joel..."
-							style={{
-								flex: 1,
-								borderRadius: 10,
-								border: `1.5px solid ${accent}`,
-								padding: "10px 14px",
-								background: darkBg,
-								color: "#fff",
-								fontSize: 15,
-								outline: "none",
-							}}
 						/>
-						<button
-							type="submit"
-							style={{
-								background: accentGradient,
-								color: darkBg,
-								border: "none",
-								borderRadius: 10,
-								padding: "0 20px",
-								fontWeight: 600,
-								fontSize: 15,
-								cursor: "pointer",
-								transition: "background 0.2s",
-							}}
-						>
-							Send
-						</button>
+						<button type="submit">Send</button>
 					</form>
 				</div>
 			)}
 
-			{/* Keyframes for fadeIn and scale animations */}
+			{/* Styles */}
 			<style>
-                {`
+				{`
           @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px);}
-            to { opacity: 1; transform: translateY(0);}
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
           }
           @keyframes scaleIn {
             from { 
@@ -639,7 +462,7 @@ export default function Chatbot() {
               transform: scale(1) translate(0, 0);
               opacity: 1;
               box-shadow: 0 8px 32px rgba(100,255,218,0.18);
-              border-radius: 22px;
+              border-radius: 18px;
             }
           }
           @keyframes scaleOut {
@@ -647,7 +470,7 @@ export default function Chatbot() {
               transform: scale(1) translate(0, 0);
               opacity: 1;
               box-shadow: 0 8px 32px rgba(100,255,218,0.18);
-              border-radius: 22px;
+              border-radius: 18px;
             }
             to { 
               transform: scale(0.3) translate(170px, 170px);
@@ -656,8 +479,49 @@ export default function Chatbot() {
               border-radius: 50%;
             }
           }
+          .chatbot-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: ${accentGradient};
+            color: ${darkBg};
+            border: none;
+            border-radius: 50%;
+            width: 3.5rem;
+            height: 3.5rem;
+            box-shadow: 0 4px 24px rgba(100,255,218,0.18);
+            font-size: 1.75rem;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background 0.2s ease;
+          }
+          .chatbot-button:hover {
+            transform: scale(1.1);
+          }
           .chatbot-window {
-            transform-origin: calc(100% - 28px) calc(100% - 28px);
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 24rem;
+            max-width: 95vw;
+            height: 32rem;
+            max-height: 85vh;
+            background: ${darkBg};
+            color: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(100,255,218,0.18);
+            z-index: 1002;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid ${accent};
+            opacity: ${open ? 1 : 0};
+            pointer-events: ${open ? "auto" : "none"};
+            transition: opacity 0.3s ease;
+            transform-origin: bottom right;
           }
           .chatbot-window.scale-in {
             animation: scaleIn 0.32s cubic-bezier(.4,1.4,.6,1) both;
@@ -665,84 +529,243 @@ export default function Chatbot() {
           .chatbot-window.scale-out {
             animation: scaleOut 0.32s cubic-bezier(.4,1.4,.6,1) both;
           }
+          .chatbot-header {
+            background: ${accentGradient};
+            color: ${darkBg};
+            padding: 1rem 1.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1.5px solid ${accent};
+          }
+          .chatbot-header button {
+            background: transparent;
+            border: none;
+            color: ${darkBg};
+            font-size: 1.5rem;
+            cursor: pointer;
+            font-weight: 700;
+            transition: transform 0.2s ease;
+          }
+          .chatbot-header button:hover {
+            transform: scale(1.2);
+          }
+          .messages-area {
+            flex: 1 1 0;
+            padding: 1rem 1rem 0;
+            overflow-y: auto;
+            background: rgba(10,25,47,0.98);
+            min-height: 10rem;
+            transition: background 0.2s ease;
+            font-size: 0.9375rem;
+            border-bottom: 1px solid ${accent};
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+          }
+          .message {
+            display: flex;
+            margin: 0.5rem 0;
+            animation: fadeIn 0.4s;
+          }
+          .user-message {
+            justify-content: flex-end;
+          }
+          .bot-message {
+            justify-content: flex-start;
+          }
+          .message span {
+            padding: 0.625rem 1rem;
+            font-size: 0.9375rem;
+            max-width: 80%;
+            box-shadow: 0 2px 8px rgba(100,255,218,0.08);
+            word-break: break-word;
+            line-height: 1.6;
+            border-radius: 16px;
+          }
+          .user-message span {
+            background: ${accentGradient};
+            color: ${darkBg};
+            border: 1.5px solid ${accent};
+            border-radius: 16px 16px 8px 16px;
+          }
+          .bot-message span {
+            background: ${darkBg2};
+            color: ${accent};
+            border: 1.5px solid ${darkBg2};
+            border-radius: 16px 16px 16px 8px;
+          }
+          .suggestions-carousel {
+            display: flex;
+            align-items: center;
+            background: ${darkBg2};
+            border-top: 1.5px solid ${accent};
+            border-bottom: 1.5px solid ${accent};
+            padding: 0 0.625rem;
+            min-height: 3rem;
+          }
+          .suggestions-carousel > div {
+            display: flex;
+            overflow-x: auto;
+            gap: 0.625rem;
+            flex: 1;
+            scrollbar-width: none;
+            ms-overflow-style: none;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+          }
+          .suggestions-carousel > div::-webkit-scrollbar {
+            display: none;
+          }
+          .suggestions-carousel button {
+            background: rgba(100,255,218,0.13);
+            color: ${accent};
+            border: 1.5px solid ${accent};
+            border-radius: 16px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s ease, color 0.2s ease;
+            margin: 0.5rem 0;
+            font-weight: 500;
+          }
+          .suggestions-carousel button:hover {
+            background: rgba(100,255,218,0.25);
+          }
+          .chatbot-input-form {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.75rem 0.625rem;
+            background: ${darkBg2};
+            border-top: 1.5px solid ${accent};
+          }
+          .chatbot-input-form input {
+            flex: 1;
+            border-radius: 12px;
+            border: 1.5px solid ${accent};
+            padding: 0.75rem 1rem;
+            background: ${darkBg};
+            color: #fff;
+            font-size: 0.9375rem;
+            outline: none;
+            min-height: 2.5rem;
+          }
+          .chatbot-input-form button {
+            background: ${accentGradient};
+            color: ${darkBg};
+            border: none;
+            border-radius: 12px;
+            padding: 0 1.5rem;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            min-height: 2.5rem;
+          }
+          .chatbot-input-form button:hover {
+            background: linear-gradient(135deg, #2d8cff 40%, #64ffda 100%);
+          }
           .chatbot-link {
             color: #64ffda;
             text-decoration: underline;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
           }
           .chatbot-link:hover {
             color: #2d8cff;
           }
 
-          /* --- Responsive styles for mobile --- */
-          @media (max-width: 600px) {
+          /* Responsive styles */
+          @media (max-width: 768px) {
+            .chatbot-button {
+              bottom: 1.5rem;
+              right: 1.5rem;
+              width: 3rem;
+              height: 3rem;
+              font-size: 1.5rem;
+            }
             .chatbot-window {
-              width: 92vw !important;
-              max-width: 400px !important;
-              min-width: 0 !important;
-              height: 68vh !important;
-              max-height: 80vh !important;
-              left: 50% !important;
-              right: auto !important;
-              transform: translateX(-50%) !important;
-              border-radius: 18px !important;
-              box-shadow: 0 6px 32px rgba(0,0,0,0.18);
-              border-width: 2px !important;
-              z-index: 1002;
-              display: flex !important;
-              flex-direction: column !important;
-              padding: 0 !important;
-              margin: 0 !important;
+              width: 90vw;
+              height: 70vh;
+              max-height: 80vh;
+              left: 50%;
+              right: auto;
+              transform: translateX(-50%);
+              border-radius: 16px;
+              border-width: 1.5px;
+              box-shadow: 0 6px 24px rgba(0,0,0,0.2);
             }
-            .chatbot-window .messages-area {
-              flex: 1 1 0 !important;
-              padding: 12px 8px 0 8px !important;
-              font-size: 14px !important;
-              min-height: 0 !important;
-              max-height: none !important;
-              display: flex !important;
-              flex-direction: column !important;
-              justify-content: flex-end !important;
+            .chatbot-header {
+              padding: 0.875rem 1.25rem;
+              font-size: 1.125rem;
             }
-            .chatbot-window form {
-              padding: 14px 10px 10px 10px !important; /* More padding for comfort */
-              margin: 0 !important;
-              gap: 10px !important; /* More space between input and button */
-              background: #112240 !important;
-              border-radius: 0 0 16px 16px !important;
-              box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+            .chatbot-header button {
+              font-size: 1.25rem;
             }
-            .chatbot-window form input {
-              padding: 14px 14px !important; /* More vertical padding */
-              font-size: 16px !important;
-              border-radius: 12px !important;
-              min-height: 44px !important;
+            .messages-area {
+              padding: 0.75rem 0.625rem 0;
+              font-size: 0.875rem;
             }
-            .chatbot-window form button[type="submit"] {
-              padding: 0 26px !important;
-              font-size: 16px !important;
-              min-height: 44px !important;
-              border-radius: 12px !important;
-              font-weight: 700 !important;
-              box-shadow: 0 2px 8px rgba(100,255,218,0.10);
+            .message span {
+              font-size: 0.875rem;
+              padding: 0.5rem 0.875rem;
             }
-            .chatbot-window .suggestions-carousel {
-              min-height: 44px !important;
-              padding: 0 2px !important;
-              margin: 0 !important;
+            .suggestions-carousel {
+              padding: 0 0.5rem;
+              min-height: 2.75rem;
+            }
+            .suggestions-carousel button {
+              font-size: 0.8125rem;
+              padding: 0.375rem 0.875rem;
+            }
+            .chatbot-input-form {
+              padding: 0.625rem 0.5rem;
+              gap: 0.375rem;
+            }
+            .chatbot-input-form input {
+              padding: 0.625rem 0.875rem;
+              font-size: 0.875rem;
+              min-height: 2.25rem;
+            }
+            .chatbot-input-form button {
+              padding: 0 1.25rem;
+              font-size: 0.875rem;
+              min-height: 2.25rem;
             }
           }
-          /* Make suggestion carousel easier to scroll on touch */
-          .chatbot-window .suggestions-carousel {
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-          }
-          .chatbot-window .suggestions-carousel::-webkit-scrollbar {
-            display: none;
+          @media (max-width: 480px) {
+            .chatbot-button {
+              bottom: 1rem;
+              right: 1rem;
+              width: 2.75rem;
+              height: 2.75rem;
+            }
+            .chatbot-window {
+              width: 95vw;
+              height: 65vh;
+              max-height: 75vh;
+              border-radius: 14px;
+            }
+            .chatbot-header {
+              padding: 0.75rem 1rem;
+              font-size: 1rem;
+            }
+            .messages-area {
+              padding: 0.625rem 0.5rem 0;
+            }
+            .suggestions-carousel button {
+              font-size: 0.75rem;
+              padding: 0.3rem 0.75rem;
+            }
+            .chatbot-input-form {
+              padding: 0.5rem 0.375rem;
+            }
           }
         `}
-            </style>
-        </>
-    );
+			</style>
+		</>
+	);
 }
