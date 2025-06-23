@@ -6,8 +6,9 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Projects from './components/Projects';
 import Timeline from './components/Timeline';
-import Chatbot
- from './components/Chatbot';
+import Chatbot from './components/Chatbot';
+import ScrollToTopButton from './components/ScrollToTopButton';
+
 function App() {
   return (
     <div className="app bg-dark text-white min-h-screen font-sans">
@@ -18,6 +19,8 @@ function App() {
       <Contact />
       <Footer />
       <Chatbot />
+      <ScrollToTopButton />
+      
     </div>
   );
 }
