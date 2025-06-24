@@ -1,5 +1,5 @@
 import React from 'react';
-import './About.css';
+import  '../styles/About.css';
 import joelImg from '../assets/joel.jpg';
 import useScrollReveal from '../hooks/useScrollReveal';
 import AnimatedLine from './AnimatedLine';
