@@ -1,5 +1,5 @@
 import React from 'react';
-import './Projects.css';
+import '../styles/Projects.css';
 import { SiGithub } from 'react-icons/si';
 import AnimatedLine from './AnimatedLine';
 import { HiExternalLink } from 'react-icons/hi';
