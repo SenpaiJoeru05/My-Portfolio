@@ -1,5 +1,5 @@
 import React from 'react';
-import './Footer.css';
+import '../styles/Footer.css';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { HiMail } from 'react-icons/hi';
 import Logo from './Logo';

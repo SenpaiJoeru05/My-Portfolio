@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Contact.css';
+import '../styles/Contact.css';
 import AnimatedLine from './AnimatedLine';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { IoCheckmarkCircle, IoCloseCircle, IoTimeOutline } from 'react-icons/io5';

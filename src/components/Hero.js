@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Hero.css';
+import '../styles/Hero.css';
 import backgroundVideo from '../assets/Test1.mp4';
 import Logo from './Logo';
 import AnimatedLine from './AnimatedLine';

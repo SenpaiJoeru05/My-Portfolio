@@ -239,7 +239,6 @@
   }
 }
 
-/* Add to d:\My Works\My-Portfolio\src\styles\Loader.css */
 
 .loader-exit {
   animation: loader-exit-anim 0.6s cubic-bezier(.4,0,.2,1) forwards;
