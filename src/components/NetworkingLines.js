@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import './NetworkingLines.css';
+import '../styles/NetworkingLines.css';
 
 function NetworkingLines() {
   const canvasRef = useRef(null);
