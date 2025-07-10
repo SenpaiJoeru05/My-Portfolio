@@ -254,3 +254,113 @@
     transform: translateY(-40px) scale(0.98);
   }
 }
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: #0a192f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s cubic-bezier(.4,0,.2,1);
+  opacity: 1;
+}
+
+.preloader-hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.logo-img {
+  width: 110px;
+  height: 110px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(-30px) scale(0.95);
+  animation: logoSlideIn 1s 0.1s ease-out forwards;
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.logo-img.no-bg {
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.logo-img img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 16px #00f2fe44);
+}
+
+@keyframes logoSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.loader-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: nameFadeUp 1s 0.7s ease-out forwards;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #00f2fe, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes nameFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loader-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 2rem;
+  position: relative;
+}
+.loader-bar-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #00f2fe, #4facfe);
+  border-radius: 2px;
+  transition: width 0.18s cubic-bezier(.4,0,.2,1);
+  width: 0;
+}
+
+@media (max-width: 600px) {
+  .logo-img {
+    width: 70px;
+    height: 70px;
+  }
+  .logo-img img {
+    width: 48px;
+    height: 48px;
+  }
+  .loader-name {
+    font-size: 1.1rem;
+  }
+  .loader-bar {
+    width: 120px;
+    height: 3px;
+    margin-top: 1.2rem;
+  }
+}

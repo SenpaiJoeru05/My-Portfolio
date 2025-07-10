@@ -1,5 +1,5 @@
 import React from 'react';
-import './Timeline.css';
+import '../styles/Timeline.css';
 import AnimatedLine from './AnimatedLine';
 import bicolLogo from '../assets/bicol-logo.png';
 import psaLogo from '../assets/PSA-Logo.png';

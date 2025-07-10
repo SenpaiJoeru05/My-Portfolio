@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import './TechGlobe.css';
+import '../styles/TechGlobe.css';
 
 const defaultTechItems = [
   { name: 'HTML5', icon: 'https://img.icons8.com/color/48/html-5.png' },
