@@ -4,15 +4,15 @@ import backgroundVideo from '../assets/Test1.mp4';
 import Logo from './Logo';
 import AnimatedLine from './AnimatedLine';
 import { Typewriter } from 'react-simple-typewriter';
-import Pdf from '../assets/CV/CVJoelRaytonFullstack.pdf';
-import NetworkingLines from './NetworkingLines'; // Import the new component
+import Pdf from '../assets/CV/JoelRayton-FullStackDev-CV.pdf';
+import NetworkingLines from './NetworkingLines';
 
 function Hero() {
   const [navOpen, setNavOpen] = useState(false);
 
   return (
     <section id='hero' className="hero-section">
-      <NetworkingLines /> {/* Add the NetworkingLines component here */}
+      <NetworkingLines />
       <div className="hero-background">
         <video autoPlay muted loop playsInline className="background-video">
           <source src={backgroundVideo} type="video/mp4" />
@@ -49,7 +49,7 @@ function Hero() {
             <span className="iam-label">I am </span> 
             <span className="typewriter-effect">
               <Typewriter
-                words={['Software Engineer', 'Full-Stack Developer', 'AI Enthusiast','Mobile Developer']}
+                words={['Software Engineer', 'Full-Stack Developer', 'AI Enthusiast','Web Developer']}
                 loop={0}
                 cursor
                 cursorStyle="|"
