@@ -5,10 +5,15 @@ import { SiGithub } from 'react-icons/si';
 import AnimatedLine from './AnimatedLine';
 import { HiExternalLink } from 'react-icons/hi';
 
-// Import Vision.png
 import VisionImage from '../assets/Images/VisionAI.png'; 
 import AccreHubImage from '../assets/Images/AccreHub.png';
 import PortfolioImage from '../assets/Images/Portfolio.png';
+
+const cardVariants = {
+  hiddenLeft: { opacity: 0, x: -80 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  hiddenRight: { opacity: 0, x: 80 },
+};
 
 function Projects() {
   const projects = [
@@ -59,7 +64,14 @@ function Projects() {
         <h2 className="section-title">Featured Projects</h2>
         <div className="projects-grid">
           {projects.map((project, index) => (
-            <div key={index} className="project-card">
+            <motion.div
+              key={index}
+              className="project-card"
+              variants={index % 2 === 0 ? cardVariants : { ...cardVariants, hiddenLeft: cardVariants.hiddenRight }}
+              initial={index % 2 === 0 ? "hiddenLeft" : "hiddenRight"}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
               <div className="project-image">
                 <img src={project.image} alt={project.title} />
                 <div className="project-links">
@@ -80,7 +92,7 @@ function Projects() {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

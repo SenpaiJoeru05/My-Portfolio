@@ -5,6 +5,15 @@ import AnimatedLine from './AnimatedLine';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { IoCheckmarkCircle, IoCloseCircle, IoTimeOutline } from 'react-icons/io5';
 
+const leftVariants = {
+  hidden: { opacity: 0, x: -80 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } }
+};
+const rightVariants = {
+  hidden: { opacity: 0, x: 80 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } }
+};
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -86,7 +95,13 @@ function Contact() {
       <div className="container">
         <h2 className="section-title">Get In Touch</h2>
         <div className="contact-content">
-          <div className="contact-info">
+          <motion.div
+            className="contact-info"
+            variants={leftVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <h3>Let's Work Together</h3>
             <p>
               I'm currently available for freelance work or full-time positions.
@@ -117,8 +132,15 @@ function Contact() {
                 <span className="sr-only">LinkedIn</span>
               </a>
             </div>
-          </div>
-          <form className="contact-form" onSubmit={handleSubmit}>
+          </motion.div>
+          <motion.form
+            className="contact-form"
+            onSubmit={handleSubmit}
+            variants={rightVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <div className="form-group">
               <label htmlFor="name" className="sr-only">Your Name</label>
               <input
@@ -163,7 +185,7 @@ function Contact() {
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
-          </form>
+          </motion.form>
         </div>
       </div>
       {status && (
@@ -175,7 +197,7 @@ function Contact() {
             ref={modalRef}
             tabIndex="-1"
             onKeyDown={handleKeyDown}
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-icon">
               {status === 'success' && <IoCheckmarkCircle size={48} />}
