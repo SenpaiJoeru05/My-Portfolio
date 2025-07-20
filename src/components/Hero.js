@@ -8,6 +8,21 @@ import { Typewriter } from 'react-simple-typewriter';
 import Pdf from '../assets/CV/JoelRayton-FullStackDev-CV.pdf';
 import NetworkingLines from './NetworkingLines';
 
+const techList = ["HTML5", "CSS", "JavaScript", "React", "Git", "GitHub"];
+
+const techContainerVariants = {
+  visible: {
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+};
+
+const techItemVariants = (index) => ({
+  hidden: { opacity: 0, x: index % 2 === 0 ? -60 : 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+});
+
 function Hero() {
   const [navOpen, setNavOpen] = useState(false);
 
@@ -77,20 +92,29 @@ function Hero() {
         </div>
       </div>
 
-      <div className="hero-tech-list">
+      <motion.div
+        className="hero-tech-list"
+        initial="hidden"
+        whileInView="visible"
+        variants={techContainerVariants}
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <div className="hero-tech-list-line top">
           <AnimatedLine />
         </div>
-        <div className="hero-tech-item">HTML5</div>
-        <div className="hero-tech-item">CSS</div>
-        <div className="hero-tech-item">JavaScript</div>
-        <div className="hero-tech-item">React</div>
-        <div className="hero-tech-item">Git</div>
-        <div className="hero-tech-item">GitHub</div>
+        {techList.map((tech, idx) => (
+          <motion.div
+            className="hero-tech-item"
+            key={tech}
+            variants={techItemVariants(idx)}
+          >
+            {tech}
+          </motion.div>
+        ))}
         <div className="hero-tech-list-line bottom">
           <AnimatedLine />
         </div>
-      </div>
+      </motion.div>
     </motion.section>
   );
 }
