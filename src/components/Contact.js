@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/Contact.css';
 import AnimatedLine from './AnimatedLine';
@@ -74,7 +75,14 @@ function Contact() {
   };
 
   return (
-    <section id="contact" className="contact-section">
+    <motion.section
+      id="contact"
+      className="contact-section"
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
       <div className="container">
         <h2 className="section-title">Get In Touch</h2>
         <div className="contact-content">
@@ -194,7 +202,7 @@ function Contact() {
           </div>
         </div>
       )}
-    </section>
+    </motion.section>
   );
 }
 

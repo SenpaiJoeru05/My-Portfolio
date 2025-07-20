@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from 'react';
 import '../styles/Projects.css';
 import { SiGithub } from 'react-icons/si';
@@ -46,7 +47,14 @@ function Projects() {
   ];
 
   return (
-    <section id="projects" className="projects-section">
+    <motion.section
+      id="projects"
+      className="projects-section"
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
       <div className="container">
         <h2 className="section-title">Featured Projects</h2>
         <div className="projects-grid">
@@ -77,7 +85,7 @@ function Projects() {
         </div>
       </div>
       <AnimatedLine />
-    </section>
+    </motion.section>
   );
 }
 

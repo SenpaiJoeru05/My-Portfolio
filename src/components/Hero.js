@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useState } from 'react';
 import '../styles/Hero.css';
 import backgroundVideo from '../assets/Test1.mp4';
@@ -11,7 +12,14 @@ function Hero() {
   const [navOpen, setNavOpen] = useState(false);
 
   return (
-    <section id='hero' className="hero-section">
+    <motion.section
+      id='hero'
+      className="hero-section"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
       <NetworkingLines />
       <div className="hero-background">
         <video autoPlay muted loop playsInline className="background-video">
@@ -83,7 +91,7 @@ function Hero() {
           <AnimatedLine />
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

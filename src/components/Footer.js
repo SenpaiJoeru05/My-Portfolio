@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from 'react';
 import '../styles/Footer.css';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
@@ -17,8 +18,13 @@ function Footer() {
   };
 
   return (
-    
-    <footer className="footer">
+    <motion.footer
+      className="footer"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
       <div className="footer-line"></div>
       <div className="footer-grid">
         {/* Left Section */}
@@ -92,7 +98,7 @@ function Footer() {
         <div className="footer-line"></div>
         <p>&copy; {new Date().getFullYear()} Joel Rayton. Built with React & ❤️</p>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
 

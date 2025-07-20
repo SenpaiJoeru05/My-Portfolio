@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from 'react';
 import '../styles/Timeline.css';
 import AnimatedLine from './AnimatedLine';
@@ -56,10 +57,27 @@ const timelineRows = [
 	},
 ];
 
+// Animation variants
+const leftVariants = {
+	hidden: { opacity: 0, x: -80 },
+	visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } }
+};
+const rightVariants = {
+	hidden: { opacity: 0, x: 80 },
+	visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } }
+};
+
 function Timeline() {
 	return (
-		<section id="timeline" className="timeline-section">
-			{/* Desktop Timeline (existing code) */}
+		<motion.section
+			id="timeline"
+			className="timeline-section"
+			initial={{ opacity: 0, y: 60 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.7, ease: "easeOut" }}
+			viewport={{ once: true, amount: 0.3 }}
+		>
+			{/* Desktop Timeline */}
 			<div className="timeline-desktop">
 				<div className="timeline-headers-wrapper">
 					<div className="timeline-header-row">
@@ -86,7 +104,13 @@ function Timeline() {
 							{/* Left: Education */}
 							<div className="timeline-side left">
 								{row.left && (
-									<div className="timeline-card education-card fade-in-left">
+									<motion.div
+										className="timeline-card education-card"
+										variants={leftVariants}
+										initial="hidden"
+										whileInView="visible"
+										viewport={{ once: true, amount: 0.3 }}
+									>
 										<div className="education-content">
 											<img
 												src={row.left.logo}
@@ -113,7 +137,7 @@ function Timeline() {
 												</ul>
 											</div>
 										</div>
-									</div>
+									</motion.div>
 								)}
 							</div>
 							{/* Center: Connector, Dot */}
@@ -121,7 +145,6 @@ function Timeline() {
 								{row.left && (
 									<div className="dot-container">
 										<div className="timeline-horizontal-connector left-connector"></div>
-										{/* Updated dot elements */}
 										<div className="timeline-dot education-dot"></div>
 									</div>
 								)}
@@ -135,7 +158,13 @@ function Timeline() {
 							{/* Right: Experience */}
 							<div className="timeline-side right">
 								{row.right && (
-									<div className="timeline-card experience-card fade-in-right">
+									<motion.div
+										className="timeline-card experience-card"
+										variants={rightVariants}
+										initial="hidden"
+										whileInView="visible"
+										viewport={{ once: true, amount: 0.3 }}
+									>
 										{row.right.company === 'Philippine Statistics Authority Region V' && (
 											<img 
 												src={psaLogo} 
@@ -165,7 +194,7 @@ function Timeline() {
 												</div>
 											)}
 										</div>
-									</div>
+									</motion.div>
 								)}
 							</div>
 						</div>
@@ -182,7 +211,13 @@ function Timeline() {
 						<span className="mobile-header-icon">🎓</span>
 						<h2>Education</h2>
 					</div>
-					<div className="mobile-card">
+					<motion.div
+						className="mobile-card"
+						variants={leftVariants}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, amount: 0.3 }}
+					>
 						<div className="mobile-card-top">
 							<img
 								src={bicolLogo}
@@ -207,7 +242,7 @@ function Timeline() {
 								<li>Completed coursework in software engineering, databases, and AI</li>
 							</ul>
 						</div>
-					</div>
+					</motion.div>
 				</div>
 
 				{/* Experience Section */}
@@ -218,7 +253,13 @@ function Timeline() {
 					</div>
 
 					{/* First Experience Card */}
-					<div className="mobile-card">
+					<motion.div
+						className="mobile-card"
+						variants={rightVariants}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, amount: 0.3 }}
+					>
 						<div className="mobile-card-top">
 							<img
 								src={psaLogo}
@@ -250,12 +291,17 @@ function Timeline() {
 								))}
 							</div>
 						</div>
-					</div>
+					</motion.div>
 
 					{/* Second Experience Card */}
-					<div className="mobile-card">
+					<motion.div
+						className="mobile-card"
+						variants={rightVariants}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, amount: 0.3 }}
+					>
 						<div className="mobile-card-top">
-							{/* No logo for this card */}
 							<div className="mobile-card-header">
 								<h3>Self-employed</h3>
 								<div className="mobile-course">Freelance Full Stack Developer</div>
@@ -281,11 +327,11 @@ function Timeline() {
 								))}
 							</div>
 						</div>
-					</div>
+					</motion.div>
 				</div>
 				<AnimatedLine />
 			</div>
-		</section>
+		</motion.section>
 	);
 }
 
