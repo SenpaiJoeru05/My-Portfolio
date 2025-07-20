@@ -1,16 +1,19 @@
-// D:\My Works\My-Portfolio\src\App.js
-import React, { useEffect } from 'react';
+
+import React, { useEffect, Suspense } from 'react';
 import './App.css';
 import { LoaderProvider, useLoader } from './context/LoaderContext'; // Import LoaderContext
 import Hero from './components/Hero';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Projects from './components/Projects';
-import Timeline from './components/Timeline';
-import Chatbot from './components/Chatbot';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import Loader from './components/Loader';
+
+
+const Projects = React.lazy(() => import('./components/Projects'));
+const Timeline = React.lazy(() => import('./components/Timeline'));
+const Chatbot = React.lazy(() => import('./components/Chatbot'));
+
 
 function AppContent() {
   const { isLoading, showLoader } = useLoader();
@@ -27,7 +30,7 @@ function AppContent() {
     <div className="app bg-dark text-white min-h-screen font-sans">
       {isLoading && <Loader onFinish={() => showLoader()()} />}
       {!isLoading && (
-        <>
+        <Suspense fallback={<div>Loading...</div>}>
           <Hero />
           <About />
           <Timeline />
@@ -36,7 +39,7 @@ function AppContent() {
           <Footer />
           <Chatbot />
           <ScrollToTopButton />
-        </>
+        </Suspense>
       )}
     </div>
   );
