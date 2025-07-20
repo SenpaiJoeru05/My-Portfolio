@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../styles/Contact.css';
 import AnimatedLine from './AnimatedLine';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
+import { HiMail } from 'react-icons/hi';
 import { IoCheckmarkCircle, IoCloseCircle, IoTimeOutline } from 'react-icons/io5';
 
 const leftVariants = {
@@ -108,8 +109,13 @@ function Contact() {
               Drop me a line if you’d like to discuss potential collaborations.
             </p>
             <div className="contact-links">
-              <a href="mailto:joelrayton@gmail.com" className="contact-link">
-                📧 joelrayton.dev@gmail.com
+              <a
+                href="mailto:joelrayton.dev@gmail.com"
+                className="contact-link icon-link"
+                aria-label="Email"
+              >
+                <HiMail size={28} />
+                <span className="sr-only">Email</span>
               </a>
               <a
                 href="https://github.com/SenpaiJoeru05"
