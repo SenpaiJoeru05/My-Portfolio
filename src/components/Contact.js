@@ -86,7 +86,7 @@ function Contact() {
             </p>
             <div className="contact-links">
               <a href="mailto:joelrayton@gmail.com" className="contact-link">
-                📧 joelrayton@gmail.com
+                📧 joelrayton.dev@gmail.com
               </a>
               <a
                 href="https://github.com/SenpaiJoeru05"
