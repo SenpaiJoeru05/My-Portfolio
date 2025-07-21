@@ -166,3 +166,16 @@ html {
   opacity: 1 !important;
   transform: translate(0, 0) !important;
 }
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+  .hero-section,
+  .projects-section,
+  .about-section,
+  .timeline-section,
+  .contact-section {
+    padding: 0 0.5rem;
+  }
+}

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import React, { useState } from 'react';
 import '../styles/Hero.css';
 import backgroundVideo from '../assets/Test1.mp4';
@@ -10,33 +9,11 @@ import NetworkingLines from './NetworkingLines';
 
 const techList = ["HTML5", "CSS", "JavaScript", "React", "Git", "GitHub"];
 
-const techContainerVariants = {
-  visible: {
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-};
-
-const techItemVariants = (index) => ({
-  hidden: { opacity: 0, x: index % 2 === 0 ? -60 : 60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
-});
-
-const isMobile = window.innerWidth <= 700;
-
 function Hero() {
   const [navOpen, setNavOpen] = useState(false);
 
   return (
-    <motion.section
-      id='hero'
-      className="hero-section"
-      initial={isMobile ? false : { opacity: 0, y: 40 }}
-      whileInView={isMobile ? false : { opacity: 1, y: 0 }}
-      transition={isMobile ? {} : { duration: 0.7, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
+    <section id='hero' className="hero-section">
       <NetworkingLines />
       <div className="hero-background">
         <video autoPlay muted loop playsInline className="background-video">
@@ -94,30 +71,23 @@ function Hero() {
         </div>
       </div>
 
-      <motion.div
-        className="hero-tech-list"
-        initial={isMobile ? false : "hidden"}
-        whileInView={isMobile ? false : "visible"}
-        variants={isMobile ? {} : techContainerVariants}
-        viewport={{ once: true, amount: 0.3 }}
-      >
+      <div className="hero-tech-list">
         <div className="hero-tech-list-line top">
           <AnimatedLine />
         </div>
         {techList.map((tech, idx) => (
-          <motion.div
+          <div
             className="hero-tech-item"
             key={tech}
-            variants={techItemVariants(idx)}
           >
             {tech}
-          </motion.div>
+          </div>
         ))}
         <div className="hero-tech-list-line bottom">
           <AnimatedLine />
         </div>
-      </motion.div>
-    </motion.section>
+      </div>
+    </section>
   );
 }
 

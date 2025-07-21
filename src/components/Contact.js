@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/Contact.css';
 import AnimatedLine from './AnimatedLine';
@@ -14,6 +13,8 @@ const rightVariants = {
   hidden: { opacity: 0, x: 80 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } }
 };
+
+const isMobile = window.innerWidth <= 700;
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -84,25 +85,112 @@ function Contact() {
     }
   };
 
+  if (isMobile) {
+    return (
+      <section
+        id="contact"
+        className="contact-section"
+      >
+        <div className="container">
+          <h2 className="section-title">Get In Touch</h2>
+          <div className="contact-content">
+            <div className="contact-info">
+              <h3>Let's Work Together</h3>
+              <p>
+                I'm currently available for freelance work or full-time positions.
+                Drop me a line if you’d like to discuss potential collaborations.
+              </p>
+              <div className="contact-links">
+                <a
+                  href="mailto:joelrayton.dev@gmail.com"
+                  className="contact-link icon-link"
+                  aria-label="Email"
+                >
+                  <HiMail size={28} />
+                  <span className="sr-only">Email</span>
+                </a>
+                <a
+                  href="https://github.com/SenpaiJoeru05"
+                  className="contact-link icon-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                >
+                  <SiGithub size={28} />
+                  <span className="sr-only">GitHub</span>
+                </a>
+                <a
+                  href="https://linkedin.com/in/joel-rayton"
+                  className="contact-link icon-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
+                  <SiLinkedin size={28} />
+                  <span className="sr-only">LinkedIn</span>
+                </a>
+              </div>
+            </div>
+            <form
+              className="contact-form"
+              onSubmit={handleSubmit}
+            >
+              <div className="form-group">
+                <label htmlFor="name" className="sr-only">Your Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Your Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email" className="sr-only">Your Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Your Email"
+                  name="_replyto"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="message" className="sr-only">Your Message</label>
+                <textarea
+                  id="message"
+                  placeholder="Your Message"
+                  name="message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  required
+                  rows="5"
+                ></textarea>
+              </div>
+              <input type="text" name="_gotcha" style={{ display: 'none' }} />
+              <button
+                type="submit"
+                className="submit-btn"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    );
+  }
   return (
-    <motion.section
-      id="contact"
-      className="contact-section"
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
+    <section id="contact" className="contact-section">
       <div className="container">
         <h2 className="section-title">Get In Touch</h2>
         <div className="contact-content">
-          <motion.div
-            className="contact-info"
-            variants={leftVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          >
+          <div className="contact-info">
             <h3>Let's Work Together</h3>
             <p>
               I'm currently available for freelance work or full-time positions.
@@ -138,14 +226,10 @@ function Contact() {
                 <span className="sr-only">LinkedIn</span>
               </a>
             </div>
-          </motion.div>
-          <motion.form
+          </div>
+          <form
             className="contact-form"
             onSubmit={handleSubmit}
-            variants={rightVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
           >
             <div className="form-group">
               <label htmlFor="name" className="sr-only">Your Name</label>
@@ -191,7 +275,7 @@ function Contact() {
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
-          </motion.form>
+          </form>
         </div>
       </div>
       {status && (
@@ -230,7 +314,7 @@ function Contact() {
           </div>
         </div>
       )}
-    </motion.section>
+    </section>
   );
 }
 

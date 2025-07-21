@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import React from 'react';
 import '../styles/Footer.css';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
@@ -6,9 +5,10 @@ import { HiMail } from 'react-icons/hi';
 import Logo from './Logo';
 import Pdf from '../assets/CV/CVJoelRaytonFullstack.pdf';
 
+const isMobile = window.innerWidth <= 700;
+
 function Footer() {
   const handleResume = () => {
-    // Add your resume PDF URL or download logic here
     window.open(Pdf, '_blank');
   };
 
@@ -18,13 +18,7 @@ function Footer() {
   };
 
   return (
-    <motion.footer
-      className="footer"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
+    <footer className="footer">
       <div className="footer-line"></div>
       <div className="footer-grid">
         {/* Left Section */}
@@ -98,7 +92,7 @@ function Footer() {
         <div className="footer-line"></div>
         <p>&copy; {new Date().getFullYear()} Joel Rayton. Built with React & ❤️</p>
       </div>
-    </motion.footer>
+    </footer>
   );
 }
 
