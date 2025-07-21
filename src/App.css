@@ -27,7 +27,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2rem; /* Default desktop padding */
 }
 
 /* Modern Scrollbar */
@@ -169,13 +169,13 @@ html {
 
 @media (max-width: 600px) {
   .container {
-    padding: 0 0.5rem;
+    padding: 0 0.5rem; /* Smaller padding for mobile */
   }
   .hero-section,
   .projects-section,
   .about-section,
   .timeline-section,
   .contact-section {
-    padding: 0 0.5rem;
+    padding: 0rem;
   }
 }
