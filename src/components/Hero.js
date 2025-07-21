@@ -23,6 +23,8 @@ const techItemVariants = (index) => ({
   visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
 });
 
+const isMobile = window.innerWidth <= 700;
+
 function Hero() {
   const [navOpen, setNavOpen] = useState(false);
 
@@ -30,9 +32,9 @@ function Hero() {
     <motion.section
       id='hero'
       className="hero-section"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      initial={isMobile ? false : { opacity: 0, y: 40 }}
+      whileInView={isMobile ? false : { opacity: 1, y: 0 }}
+      transition={isMobile ? {} : { duration: 0.7, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.3 }}
     >
       <NetworkingLines />
@@ -94,9 +96,9 @@ function Hero() {
 
       <motion.div
         className="hero-tech-list"
-        initial="hidden"
-        whileInView="visible"
-        variants={techContainerVariants}
+        initial={isMobile ? false : "hidden"}
+        whileInView={isMobile ? false : "visible"}
+        variants={isMobile ? {} : techContainerVariants}
         viewport={{ once: true, amount: 0.3 }}
       >
         <div className="hero-tech-list-line top">
