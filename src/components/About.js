@@ -42,7 +42,7 @@ function About() {
               
             </div>
 
-            <h2 className="section-heading">// Tech Used</h2>
+            <h2 className="section-heading">// Tech and Tools</h2>
             <TechGlobe />
           </div>
         </div>
