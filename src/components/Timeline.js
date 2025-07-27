@@ -283,7 +283,6 @@ function Timeline() {
 						</div>
 					</div>
 				</div>
-				<AnimatedLine />
 			</div>
 		</section>
 	);

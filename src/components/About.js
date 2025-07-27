@@ -46,8 +46,8 @@ function About() {
             <TechGlobe />
           </div>
         </div>
-        <AnimatedLine />
       </div>
+      <AnimatedLine />
     </section>
   );
 }

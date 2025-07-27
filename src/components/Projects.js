@@ -82,7 +82,6 @@ function Projects() {
               </div>
             ))}
           </div>
-          <AnimatedLine />
         </div>
       </section>
     );
@@ -123,8 +122,8 @@ function Projects() {
             </div>
           ))}
         </div>
-        <AnimatedLine />
       </div>
+      <AnimatedLine />
     </section>
   );
 }
