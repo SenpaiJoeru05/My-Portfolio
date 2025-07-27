@@ -3,7 +3,7 @@ import '../styles/Footer.css';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { HiMail } from 'react-icons/hi';
 import Logo from './Logo';
-import Pdf from '../assets/CV/CVJoelRaytonFullstack.pdf';
+import Pdf from '../assets/CV/JoelRayton-FullStackDev-CV.pdf';
 
 const isMobile = window.innerWidth <= 700;
 

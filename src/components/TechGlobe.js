@@ -11,8 +11,8 @@ const defaultTechItems = [
   { name: 'MySQL', icon: 'https://img.icons8.com/color/48/mysql-logo.png' },
   { name: 'Tailwind CSS', icon: 'https://img.icons8.com/color/48/tailwindcss.png' },
   { name: 'React', icon: 'https://img.icons8.com/color/48/react-native.png' },
-  { name: 'Alpine.js', icon: 'https://alpinejs.dev/alpine_long.svg' }, // Custom, may need adjustment
-  { name: 'Livewire', icon: 'https://laravel-livewire.com/img/favicon.png' }, // Custom, may need adjustment
+  // { name: 'Alpine.js', icon: 'https://alpinejs.dev/alpine_long.svg' }, 
+  { name: 'Livewire', icon: 'https://laravel-livewire.com/img/favicon.png' }, 
   { name: 'Laravel', icon: 'https://img.icons8.com/ios-filled/50/ffffff/laravel.png' },
   { name: 'FilamentPHP', icon: 'https://avatars.githubusercontent.com/u/75367858' },
   { name: 'Ultralytics', icon: 'https://cdn.prod.website-files.com/646dd1f1a3703e451ba81ecc/64777c3e071ec953437e6950_logo.svg' },
@@ -33,8 +33,8 @@ function TechGlobe({ techItems = defaultTechItems }) {
     if (!globe) return;
     globe.innerHTML = '';
 
-    let radius = Math.min(globe.clientWidth, globe.clientHeight) * 0.4; // Adjust sphere size
-    const dampingFactor = 0.95; // Slightly faster slowdown
+    let radius = Math.min(globe.clientWidth, globe.clientHeight) * 0.4; 
+    const dampingFactor = 0.95; 
     let center = { x: globe.clientWidth / 2, y: globe.clientHeight / 2 };
     const positions = fibonacciSphere(techItems.length);
     const elements = [];
@@ -43,18 +43,17 @@ function TechGlobe({ techItems = defaultTechItems }) {
     let last3D = null;
     let autoRotateMatrix = null;
     let idleSpinAxis = randomAxis();
-    let idleSpinSpeed = window.innerWidth < 768 ? 0.001 : 0.002; // Slower on mobile
+    let idleSpinSpeed = window.innerWidth < 768 ? 0.001 : 0.002; 
     let velocity = 0;
     let lastAxis = [0, 0, 1];
     let lastTime = null;
     let lastPointer = { x: 0, y: 0 };
 
-    // Make tech items not block pointer events
+ 
     techItems.forEach((tech, i) => {
       const div = document.createElement('div');
       div.className = 'about-globe-tech-item';
       div.innerHTML = `<img src="${tech.icon}" alt="${tech.name}"><p>${tech.name}</p>`;
-      // Prevent pointer events on the tech items and children
       div.style.pointerEvents = 'none';
       globe.appendChild(div);
       elements.push(div);
@@ -139,18 +138,18 @@ function TechGlobe({ techItems = defaultTechItems }) {
       return [px, py, pz];
     }
 
-    // Replace the updatePositions function with this improved version:
+ 
     function updatePositions() {
       let closest = -1, minDist = Infinity;
       elements.forEach((el, i) => {
         const pos = positions[i];
         const rot = mat3MultiplyVec3(rotationMatrix, pos);
         
-        // Ensure points stay on sphere surface
+  
         const normalizedRot = normalize(rot);
         
-        // Calculate position with normalized coordinates
-        const scale = 1 + normalizedRot[2] * 0.2; // Reduced scale effect
+  
+        const scale = 1 + normalizedRot[2] * 0.2; 
         const x = center.x + normalizedRot[0] * radius;
         const y = center.y - normalizedRot[1] * radius;
         const opacity = Math.max(0.3, (normalizedRot[2] + 1) * 0.5);
@@ -173,27 +172,24 @@ function TechGlobe({ techItems = defaultTechItems }) {
       return closest;
     }
 
-    // Update the animate function for smoother rotation
     function animate() {
       requestAnimationFrame(animate);
       
       if (isDragging) {
-        // User is actively dragging
         rotationMatrix = normalize3x3(rotationMatrix);
       } else if (velocity > 0.001) {
-        // Apply inertia with damping
         const spinMat = createRotationMatrix(lastAxis, velocity * 0.016);
         rotationMatrix = mat3Multiply(spinMat, rotationMatrix);
         rotationMatrix = normalize3x3(rotationMatrix);
         velocity *= dampingFactor;
       } else if (!autoRotateMatrix) {
-        // Idle animation
+      
         velocity = 0;
         const spinMat = createRotationMatrix(idleSpinAxis, idleSpinSpeed);
         rotationMatrix = mat3Multiply(spinMat, rotationMatrix);
         rotationMatrix = normalize3x3(rotationMatrix);
       } else {
-        // Auto-rotating to focus on an item
+       
         rotationMatrix = mat3Multiply(autoRotateMatrix, rotationMatrix);
         rotationMatrix = normalize3x3(rotationMatrix);
         autoRotateMatrix = null;
@@ -202,12 +198,10 @@ function TechGlobe({ techItems = defaultTechItems }) {
       updatePositions();
     }
 
-    // Add this new function to keep the rotation matrix orthonormal
+    
     function normalize3x3(matrix) {
-      // Normalize first row
       let row1 = normalize([matrix[0], matrix[1], matrix[2]]);
       
-      // Make second row perpendicular to first row
       let row2 = [matrix[3], matrix[4], matrix[5]];
       let dot12 = dot(row1, row2);
       row2 = [
@@ -217,7 +211,6 @@ function TechGlobe({ techItems = defaultTechItems }) {
       ];
       row2 = normalize(row2);
       
-      // Third row is cross product of first two
       let row3 = cross(row1, row2);
       
       return [
@@ -244,7 +237,7 @@ function TechGlobe({ techItems = defaultTechItems }) {
       lastPointer = { x: e.clientX, y: e.clientY };
       lastTime = Date.now();
       velocity = 0;
-      autoRotateMatrix = null; // Stop any auto-rotation
+      autoRotateMatrix = null; 
     }
 
     function onPointerMove(e) {
@@ -252,23 +245,20 @@ function TechGlobe({ techItems = defaultTechItems }) {
 
       const currentTime = Date.now();
       if (!lastTime) lastTime = currentTime;
-      const deltaTime = (currentTime - lastTime) / 1000; // Convert to seconds
+      const deltaTime = (currentTime - lastTime) / 1000; 
       lastTime = currentTime;
 
       const rect = globe.getBoundingClientRect();
       const current = projectOnTrackball(e.clientX - rect.left, e.clientY - rect.top, globe.clientWidth, globe.clientHeight);
       
       if (last3D) {
-        // Calculate rotation axis and angle from the arc movement on the virtual trackball
         const axis = cross(last3D, current);
         const angle = Math.acos(Math.min(1, dot(last3D, current))) * 2;
         
-        // Only rotate if we have significant movement
+    
         if (Math.abs(angle) > 0.001) {
           const rotMat = createRotationMatrix(axis, angle);
           rotationMatrix = mat3Multiply(rotMat, rotationMatrix);
-          
-          // Calculate angular velocity for inertia
           velocity = angle / deltaTime;
           lastAxis = axis;
         }
@@ -284,13 +274,11 @@ function TechGlobe({ techItems = defaultTechItems }) {
       lastTime = null;
       const index = updatePositions();
       
-      // Only focus if velocity is low enough
       if (velocity < 0.5) {
         focusOnIndex(index);
       }
     }
 
-    // Touch event handlers with better sensitivity
     function handleTouchStart(e) {
       if (e.touches.length === 1) {
         e.preventDefault();
@@ -318,15 +306,13 @@ function TechGlobe({ techItems = defaultTechItems }) {
       onPointerUp();
     }
 
-    // Update the radius calculation to be responsive
     function updateRadius() {
       const width = globe.clientWidth;
       const height = globe.clientHeight;
-      radius = Math.min(width, height) * (width < 768 ? 0.40 : 0.4); // Smaller radius on mobile
+      radius = Math.min(width, height) * (width < 768 ? 0.40 : 0.4);
       center = { x: width / 2, y: height / 2 };
     }
 
-    // Add resize observer for smooth size updates
     const resizeObserver = new ResizeObserver(() => {
       updateRadius();
       updatePositions();
@@ -334,7 +320,6 @@ function TechGlobe({ techItems = defaultTechItems }) {
 
     resizeObserver.observe(globe);
 
-    // Attach pointer events to the globe container itself
     globe.addEventListener('pointerdown', onPointerDown);
     window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('pointerup', onPointerUp);
