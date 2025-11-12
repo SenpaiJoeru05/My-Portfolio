@@ -42,7 +42,7 @@ const timelineRows = [
 			type: 'experience',
 			title: 'Freelance Full Stack Developer',
 			company: 'Self-employed',
-			duration: '2024 - Present',
+			duration: '2024 - 2025',
 			location: 'Ligao City, Philippines',
 			details: [
 				"Developed AccreHub, an accreditation file management system for a local school client",
@@ -52,6 +52,23 @@ const timelineRows = [
 				"Provided ongoing support and enhancements based on client feedback",
 			],
 			tech: ['Laravel', 'PHP', 'PostgreSQL', 'HTML', 'CSS', 'JavaScript', 'FilamentPHP'],
+		},
+	},
+	{
+		left: null,
+		right: {
+			type: 'experience',
+			title: 'Junior Software Developer',
+			company: 'Blue Aurora Solution',
+			duration: 'August 2025 - Present',
+			location: 'Makati City, Philippines (Remote)',
+			details: [
+				'Working on full-stack web applications and collaborating with cross-functional teams',
+				'Implementing features, writing unit and integration tests, and improving performance',
+				'Maintaining and refactoring existing codebase to improve reliability and readability',
+				'Participating in code reviews and contributing to architectural discussions',
+			],
+			tech: ['TypeScript', 'Laravel', 'JavaScript', 'React', 'Vue', 'MySQL', 'PostgreSQL'],
 		},
 	},
 ];
@@ -218,7 +235,34 @@ function Timeline() {
 					</div>
 
 					{/* First Experience Card */}
-					<div className="mobile-card">
+						<div className="mobile-card">
+							{/* Blue Aurora Card */}
+							<div className="mobile-card">
+								<div className="mobile-card-top">
+									{/* No logo available */}
+									<div className="mobile-card-header">
+										<h3>Blue Aurora Solution</h3>
+										<div className="mobile-course">Junior Software Developer</div>
+									</div>
+								</div>
+								<div className="mobile-card-body">
+									<div className="mobile-meta-row">
+										<span>📅 2025 - Present</span>
+										<span>📍 Philippines (Remote)</span>
+									</div>
+									<ul className="mobile-details">
+										<li>Working on full-stack web applications and collaborating with cross-functional teams</li>
+										<li>Implementing features, writing unit and integration tests, and improving performance</li>
+										<li>Maintaining and refactoring existing codebase to improve reliability and readability</li>
+										<li>Participating in code reviews and contributing to architectural discussions</li>
+									</ul>
+									<div className="mobile-tech-stack">
+										{['TypeScript', 'Laravel', 'JavaScript', 'React', 'Vue', 'MySQL', 'PostgreSQL'].map((tech, i) => (
+											<span key={i} className="mobile-tech-tag">{tech}</span>
+										))}
+									</div>
+								</div>
+							</div>
 						<div className="mobile-card-top">
 							<img
 								src={psaLogo}
