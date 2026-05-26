@@ -61,7 +61,7 @@ const timelineRows = [
 			title: 'Junior Software Developer',
 			company: 'Blue Aurora Solution',
 			duration: 'August 2025 - Present',
-			location: 'Makati City, Philippines (Remote)',
+			location: 'Makati City, Philippines (Hybrid)',
 			details: [
 				'Working on full-stack web applications and collaborating with cross-functional teams',
 				'Implementing features, writing unit and integration tests, and improving performance',
